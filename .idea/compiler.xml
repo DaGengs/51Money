@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="51Money_AdminService" />
+        <module name="51Money_AdminWeb" />
+        <module name="51Money_Core" />
+        <module name="51Money_Entity" />
+        <module name="51Money_Mapper" />
+        <module name="51Money_Provider" />
+        <module name="51Money_Service" />
+        <module name="51Money_SSOController" />
+        <module name="51Money_SSOProvider" />
+        <module name="51Money_SSOService" />
+        <module name="51Money_UIController" />
+        <module name="51Money_UIWeb" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

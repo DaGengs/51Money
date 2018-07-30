@@ -1,0 +1,65 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>91Money平台</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/common.css" rel="stylesheet" />
+<link href="css/register.css" rel="stylesheet" type="text/css">
+    <link href="css/verify.css" rel="stylesheet">
+<script type="text/javascript" src="script/jquery.min.js"></script>
+    <script src="script/jquery-validation-1.14.0/jquery.validate.js"></script>
+    <script src="script/jquery-validation-1.14.0/localization/messages_zh.js"></script>
+    <script src="script/jquery.form.js"></script>
+    <script src="script/layer/layer.js"></script>
+    <script src="script/verify.min.js"></script>
+<script type="text/javascript" src="script/common.js"></script>
+<script src="script/login.js" type="text/javascript"></script>
+</head>
+<body>
+<script src="script/head.js"></script>
+<!--注册-->
+<div class="wrap">
+ <form id="loginForm" name="loginForm" action="http://localhost:82/doLogin.do" method="post">
+	<div class="tdbModule loginPage">
+		<div class="registerTitle">用户登录</div>
+		<div class="registerCont">
+			<ul>
+				<li>
+					<span class="dis">用户名：</span><input class="input" type="text" name="name" id="username" maxlength="24" tabindex="1" autocomplete="off">
+				</li>
+
+				<li>
+				   <span class="dis">密码：</span><input class="input" type="password" name="password" id="password" maxlength="24" tabindex="1" autocomplete="off">
+				</li>
+				<li>
+                    <label style="float: left; margin-left: 81px;margin-top: 10px">滑动验证：</label><div id="mpanel1" style="margin-left: 160px" ></div>
+				</li>
+				<li class="btn">
+					<input style="margin-left: 50px" type="submit" disabled class="radius1" value="立即登录" id="submitBtn" >
+				</li>
+			</ul>
+		</div>
+	</div>
+ </form>
+</div>
+<!--网站底部-->
+<script src="script/foot.js"></script>
+<script>
+    $('#mpanel1').slideVerify({
+        type : 1,		//类型
+        vOffset : 5,	//误差量，根据需求自行调整
+        barSize : {
+            width : '250px',
+            height : '40px',
+        },
+        ready : function() {
+        },
+        success : function() {
+            $(".radius1").removeAttr("disabled");
+        }
+    });
+</script>
+</body>
+</html>
