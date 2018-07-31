@@ -6,9 +6,9 @@
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="ossUtil" class="cn.iruier.core.oss.OSSUtil" >
-        <constructor-arg name="accessKeyId" value="LTAIt3Ma8LoatnR0"></constructor-arg>
-        <constructor-arg name="accessKeySecret" value="dtxCEjrmXoLka0JRhEZpGxtfEWrhgQ"></constructor-arg>
-        <constructor-arg name="bucketName" value="iruier"></constructor-arg>
+        <constructor-arg name="accessKeyId" value="***"></constructor-arg>
+        <constructor-arg name="accessKeySecret" value="***"></constructor-arg>
+        <constructor-arg name="bucketName" value="***"></constructor-arg>
         <constructor-arg name="endpoint" value="http://oss-cn-beijing.aliyuncs.com"></constructor-arg>
     </bean>
 </beans>
