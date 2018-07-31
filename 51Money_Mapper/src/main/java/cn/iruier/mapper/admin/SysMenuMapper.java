@@ -18,7 +18,7 @@ public interface SysMenuMapper {
 
     int queryCount();
 
-    int deleteBatch(int[] menu_id);
+    int deleteBatch(int[] menu_ids);
 
     List<SysMenu> queryAll();
 
