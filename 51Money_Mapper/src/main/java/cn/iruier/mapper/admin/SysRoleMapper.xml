@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.iruier.mapper.admin.SysRoleMapper">
+
+    <sql id="base">
+        role_id, role_name, remark, create_user_id, create_time
+    </sql>
+
+    <insert id="insert" parameterType="SysRole">
+        insert into sys_role(role_name, remark, create_user_id, create_time) values(#{role_name}, #{remark}, #{create_user_id}, now())
+    </insert>
+
+    <select id="queryByPage" resultType="SysRole">
+        select <include refid="base"/> from sys_role limit #{index}, #{size}
+    </select>
+
+    <update id="update" parameterType="SysRole">
+        update sys_role set role_name = #{role_name}, remark = #{remark}, create_user_id = #{create_user_id}, create_time = now() where role_id = #{role_id}
+    </update>
+
+    <select id="queryCount" resultType="Integer">
+        select COUNT(*) from sys_role
+    </select>
+
+    <delete id="deleteBatch">
+        delete from sys_role where role_id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+        ;
+        delete form sys_role_menu where role_id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+        ;
+        delete from sys_user_role where role_id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="queryAll">
+        select <include refid="base"/> from sys_role
+    </select>
+
+    <select id="queryRoleNameListByUid" resultType="String">
+        SELECT r.role_name FROM sys_role r LEFT JOIN sys_user_role ur ON r.role_id = ur.role_id WHERE ur.user_id = #{user_id}
+    </select>
+</mapper>

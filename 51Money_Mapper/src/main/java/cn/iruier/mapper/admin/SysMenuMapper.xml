@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.iruier.mapper.admin.SysMenuMapper">
+
+    <sql id="base">
+        menu_id, parent_id, name, url, perms, type, icon, order_num
+    </sql>
+
+    <insert id="insert" parameterType="SysMenu">
+        insert into sys_menu(parent_id, name, url, perms, type, icon, order_num) values(#{parent_id},#{name},#{url},#{perms},#{type},#{icon},#{order_num})
+    </insert>
+
+    <select id="queryByPage" resultType="SysMenu">
+        select <include refid="base"/> from sys_menu limit #{index}, #{size} order by order_num asc
+    </select>
+
+    <update id="update" parameterType="SysMenu">
+        update parent_id = #{parent_id}, sys_menu set name = #{name}, url = #{url}, perms = #{perms}, type = #{type}, icon = #{icon}, order_num = #{order_num} where menu_id = #{menu_id}
+    </update>
+
+    <select id="queryCount" resultType="Integer">
+        select COUNT(*) from sys_menu
+    </select>
+
+    <delete id="deleteBatch">
+        delete from sys_menu where menu_id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+        ;
+        delete from sys_role_menu where menu_id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="queryAll" resultType="SysMenu">
+        SELECT m1.*, m2.name parent_name FROM sys_menu m1 LEFT JOIN sys_menu m2 ON m1.parent_id = m2.menu_id ORDER BY m1.order_num ASC
+    </select>
+
+    <select id="queryNotButtonList" resultType="SysMenu">
+        select <include refid="base"/> from sys_menu where type != 2 order by order_num asc
+    </select>
+
+    <select id="queryTopMenuList" resultType="SysMenu">
+        select <include refid="base"/> from sys_menu where type != 2 and parent_id = 1 order by order_num asc
+    </select>
+
+    <select id="queryListByParentId" resultType="SysMenu">
+        select <include refid="base"/> from sys_menu where type != 2 and parent_id = #{parent_id} order by order_num asc
+    </select>
+
+    <select id="queryAllPermsByUid" resultType="String">
+        SELECT m.perms FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = #{user_id}
+    </select>
+
+    <select id="queryAllMenuId" resultType="Integer">
+        SELECT DISTINCT m.menu_id FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = #{user_id}
+    </select>
+
+    <select id="queryUserTop" resultType="SysMenu">
+        SELECT m1.*, m2.name parent_name FROM sys_menu m1 LEFT JOIN sys_menu m2 ON m1.parent_id = m2.menu_id WHERE m1.menu_id in
+        <foreach collection="array" open="(" close=")" separator="," item="pid">
+            #{pid}
+        </foreach>
+    </select>
+</mapper>

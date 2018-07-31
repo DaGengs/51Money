@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.iruier.mapper.admin.SysUserMapper">
+
+    <sql id="base">
+        user_id, username, password, email, mobile, status, create_user_id, create_time
+    </sql>
+
+    <insert id="insert" parameterType="SysUser">
+        insert into sys_user (username, password,email, mobile, status,create_user_id, create_time)
+        values (#{username}, #{password}, #{email}, #{mobile}, 1,#{create_user_id}, now())
+    </insert>
+
+    <select id="queryByName" resultType="SysUser">
+        select <include refid="base"/> from sys_user where username = #{username}
+    </select>
+
+    <select id="queryByPage" resultType="SysUser">
+        select <include refid="base"/> from sys_user limit #{index}, #{size}
+    </select>
+
+    <update id="deleteBatch">
+        update sys_user set status = 2 where user_id in
+        <foreach collection="array" open="(" close=")" item="id" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="queryCount" resultType="Integer">
+        select COUNT(*) from sys_user
+    </select>
+</mapper>
