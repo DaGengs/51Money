@@ -6,8 +6,11 @@
     <title>用户管理</title>
     <link rel="stylesheet" href="lib/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" media="all"/>
+    <link rel="stylesheet" href="static/css/font.css">
+    <link rel="stylesheet" href="static/css/xadmin.css">
     <script src="lib/jquery/jquery-3.3.1.min.js"></script>
     <script src="lib/layui/layui.js"></script>
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
     <script src="static/js/user.js"></script>
 </head>
 <body>
@@ -23,6 +26,15 @@
         {{ d.roles[i].role_name }}
         {{# } }}
 </script>
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a>
+          <cite>用户管理</cite></a>
+      </span>
+    <a style="float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="iconfont" style="line-height:30px">&#xe6aa;</i></a>
+</div>
 <div style="display: none;" id="addModel">
     <form class="layui-form">
         <div style="margin-top: 30px;">
@@ -50,9 +62,9 @@
         </div>
     </form>
 </div>
-<div style="margin-left: 1150px;margin-top: 30px">
+<div style="margin-top: 10px;margin-right: 20px" align="right">
     <div class="layui-btn-group">
-        <a class="layui-btn layui-btn-primary" href="javascript:;" data-method="addUser" id="add">
+        <a class="layui-btn layui-btn-sm layui-btn-normal" href="javascript:;" data-method="addUser" id="add">
             <i class="layui-icon">&#xe654;</i>新增
         </a>
         <!--  <button class="layui-btn layui-btn-primary">
@@ -72,7 +84,7 @@
         </div>
     </form>
 </div>
-<div class="layui-container">
+<div>
     <table id="tbdata" lay-filter="tbop"></table>
 </div>
 </body>

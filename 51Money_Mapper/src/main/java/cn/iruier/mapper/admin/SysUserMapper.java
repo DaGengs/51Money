@@ -15,6 +15,8 @@ public interface SysUserMapper {
 
     SysUser queryByName(String name);
 
+    SysUser queryById(int user_id);
+
     List<SysUser> queryByPage(@Param("index")int index, @Param("size")int size);
 
     int deleteBatch(int[] user_ids);

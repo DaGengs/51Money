@@ -11,7 +11,7 @@
     </insert>
 
     <select id="queryByPage" resultType="SysMenu">
-        select <include refid="base"/> from sys_menu limit #{index}, #{size} order by order_num asc
+        select <include refid="base"/> from sys_menu order by order_num asc limit #{index}, #{size}
     </select>
 
     <update id="update" parameterType="SysMenu">
@@ -35,7 +35,8 @@
     </delete>
 
     <select id="queryAll" resultType="SysMenu">
-        SELECT m1.*, m2.name parent_name FROM sys_menu m1 LEFT JOIN sys_menu m2 ON m1.parent_id = m2.menu_id ORDER BY m1.order_num ASC
+     /*   SELECT m1.*, m2.name parent_name FROM sys_menu m1 LEFT JOIN sys_menu m2 ON m1.parent_id = m2.menu_id ORDER BY m1.order_num ASC*/
+        select <include refid="base"/> from sys_menu
     </select>
 
     <select id="queryNotButtonList" resultType="SysMenu">
@@ -43,7 +44,11 @@
     </select>
 
     <select id="queryTopMenuList" resultType="SysMenu">
-        select <include refid="base"/> from sys_menu where type != 2 and parent_id = 1 order by order_num asc
+        select <include refid="base"/> from sys_menu where parent_id= null order by orderNum asc
+    </select>
+
+    <select id="queryAllTop" resultType="SysMenu">
+        select * from sys_menu where parent_id is null order by order_num desc
     </select>
 
     <select id="queryListByParentId" resultType="SysMenu">
@@ -51,17 +56,26 @@
     </select>
 
     <select id="queryAllPermsByUid" resultType="String">
-        SELECT m.perms FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = #{user_id}
+        SELECT m.perms FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = #{user_id} order by order_num asc
     </select>
 
-    <select id="queryAllMenuId" resultType="Integer">
-        SELECT DISTINCT m.menu_id FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = #{user_id}
+    <select id="queryAllMenuId" resultType="SysMenu">
+        SELECT DISTINCT m.menu_id FROM sys_menu m LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id WHERE ur.user_id = #{user_id} order by order_num asc
     </select>
 
     <select id="queryUserTop" resultType="SysMenu">
-        SELECT m1.*, m2.name parent_name FROM sys_menu m1 LEFT JOIN sys_menu m2 ON m1.parent_id = m2.menu_id WHERE m1.menu_id in
-        <foreach collection="array" open="(" close=")" separator="," item="pid">
-            #{pid}
+        select * from sys_menu where parent_id is null and menu_id in
+        <foreach collection="list" open="(" close=")" separator="," item="mid">
+            #{mid}
         </foreach>
+        order by order_num asc
+    </select>
+
+    <select id="queryUserMenuByParentId">
+        select * from sys_menu where parent_id = #{menu_id} and menu_id in
+        <foreach collection="menu_ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        order by order_num asc
     </select>
 </mapper>

@@ -10,9 +10,6 @@ import cn.iruier.service.admin.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @Author: iruier
  * @Date: 2018/7/30 23:22
@@ -46,5 +43,10 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public ResultVo deleteBatch(int[] user_ids) {
         return ExecuteUtil.getResult(sysUserMapper.deleteBatch(user_ids), "删除用户");
+    }
+
+    @Override
+    public SysUser queryById(int user_id) {
+        return sysUserMapper.queryById(user_id);
     }
 }

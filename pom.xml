@@ -20,6 +20,7 @@
         <module>51Money_SSOService</module>
         <module>51Money_SSOProvider</module>
         <module>51Money_SSOController</module>
+        <module>51Money_Spider</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -48,6 +49,9 @@
         <slf4j.version>1.7.25</slf4j.version>
         <oss.version>2.8.3</oss.version>
         <ehcache.version>1.4.0</ehcache.version>
+        <webmagic-core.version>0.7.3</webmagic-core.version>
+        <webmagic-extension.version>0.7.3</webmagic-extension.version>
+        <freemarker.version>2.3.28</freemarker.version>
     </properties>
 
     <!--限定版本号-->
@@ -190,6 +194,24 @@
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-ehcache</artifactId>
                 <version>${ehcache.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>us.codecraft</groupId>
+                <artifactId>webmagic-core</artifactId>
+                <version>${webmagic-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>us.codecraft</groupId>
+                <artifactId>webmagic-extension</artifactId>
+                <version>${webmagic-extension.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
             </dependency>
 
         </dependencies>

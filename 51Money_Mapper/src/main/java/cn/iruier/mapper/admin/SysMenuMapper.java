@@ -33,6 +33,11 @@ public interface SysMenuMapper {
     List<SysMenu> queryTopMenuList();
 
     /**
+     * 获取所有上级菜单
+     * */
+    List<SysMenu> queryAllTop();
+
+    /**
      * 根据父菜单，查询子菜单
      */
     List<SysMenu> queryListByParentId(int parent_id);
@@ -43,7 +48,7 @@ public interface SysMenuMapper {
     List<String> queryAllPermsByUid(int user_id);
 
     /**
-     * 查询用户的所有菜单ID
+     * 查询用户的所有菜单
      */
     List<Integer> queryAllMenuId(int user_id);
 
@@ -52,5 +57,5 @@ public interface SysMenuMapper {
      */
     List<SysMenu> queryUserTop(List<Integer> menu_idList);
 
-   /* List<SysMenu> queryUserMenuByParentId(int menu_id, List<Integer> menu_idList);*/
+    List<SysMenu> queryUserMenuByParentId(@Param("menu_id") int menu_id,@Param("menu_ids") List<Integer> menu_ids);
 }

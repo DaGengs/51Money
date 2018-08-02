@@ -17,4 +17,6 @@ public interface SysUserService {
 
     ResultVo deleteBatch(int[] user_ids);
 
+    SysUser queryById(int user_id);
+
 }

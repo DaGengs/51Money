@@ -3,14 +3,27 @@ layui.use(['form', 'table'], function(){
 
     table.render({
         elem: '#tbdata'
-        ,url: 'userQueryByPage.do' //数据接口
+        ,url: '/sys/user/list.do' //数据接口
         ,page: true //开启分页
         ,cols: [[ //表头
-            {field: 'user_id', title: '用户ID', fixed: 'left'}
-            ,{field: 'user_no', title: '用户名',}
-            ,{field: 'realname', title: '真实姓名',}
-            ,{field: 'role_name', title: '角色名称',templet: '#roleTpl'}
-            ,{field: 'status', title: '状态',templet: function(d){return d.status == 1 ? "有效" : "无效"}}
+            {field: 'user_id', align:'center',title: '用户ID', fixed: 'left'}
+            ,{field: 'username',align:'center', title: '用户名',}
+            ,{field: 'email', align:'center',title: '邮箱',}
+            ,{field: 'mobile', align:'center',title: '手机号'}
+            ,{field: 'create_user_id', align:'center',title: '创建人ID',templet: function(d){return d.create_user_id == '' ? "无" : d.create_user_id}}
+            ,{field: 'create_time', align:'center',title: '创建时间'}
+            ,{field: 'status',width:'5%', align:'center',title: '状态',templet: function (obj) {
+                    var r;
+                    switch (obj.status) {
+                        case 1:
+                            r = "<span class='layui-badge layui-bg-blue'>有效</span>";
+                            break;
+                        case 2:
+                            r = "<span class='layui-badge layui-bg-red'>无效</span>";
+                            break;
+                    }
+                    return r;
+                }}
             ,{fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#toolbar'}
         ]]
     });

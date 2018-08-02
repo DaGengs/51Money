@@ -19,18 +19,18 @@
             var element = layui.element;
             $(function () {
                 $.ajax({
-                    url: "getMenu.do",
+                    url: "/sys/menu/getMenu.do",
                     success: function (data) {
                         console.log(data);
                         var str = "";
                         for (var i = 0; i < data.length; i++) {
                             str += "<li>";
-                            str += "<a href='javascript:;'><i class='iconfont'>"+data[i].icon+"</i><cite>"+data[i].title+"</cite><i class='iconfont nav_right'>&#xe6a7;</i></a>";
+                            str += "<a href='javascript:;'><i class='iconfont'>"+data[i].icon+"</i><cite>"+data[i].name+"</cite><i class='iconfont nav_right'>&#xe6a7;</i></a>";
                             if (data[i].children.length > 0) {
                                 str += "<ul class='sub-menu'>";
                                 for (var j = 0; j < data[i].children.length; j++) {
                                     str += "<li>";
-                                    str += "<a _href='"+data[i].children[j].menu_url+"'><i class='iconfont'>&#xe6a7;</i><cite>"+data[i].children[j].menu_name+"</cite></a>";
+                                    str += "<a _href='"+data[i].children[j].url+"'><i class='iconfont'>&#xe6a7;</i><cite>"+data[i].children[j].name+"</cite></a>";
                                     str += "</li>";
                                 }
                                 str += "</ul>";
@@ -60,7 +60,7 @@
               <dd><a href="javascript:;" data-method="editPwd" id="a2">修改密码</a></dd>
             </dl>
           </li>
-          <li class="layui-nav-item to-index"><a href="loginOut.do">注销</a></li>
+          <li class="layui-nav-item to-index"><a href="/sys/user/loginout.do">注销</a></li>
         </ul>
         
     </div>

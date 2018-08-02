@@ -3,6 +3,7 @@ package cn.iruier.service.admin;
 import cn.iruier.core.vo.PageVo;
 import cn.iruier.core.vo.ResultVo;
 import cn.iruier.entity.admin.SysMenu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,11 +26,9 @@ public interface SysMenuService {
 
     List<SysMenu> queryTopMenuList();
 
-    List<SysMenu> queryListByParentId(int parent_id);
-
     List<String> queryAllPermsByUid(int user_id);
 
-    List<Integer> queryAllMenuId(int user_id);
+    List<SysMenu> queryAllMenuList(int user_id);
 
-    List<SysMenu> queryUserTop(List<Integer> menu_idList);
+    ResultVo queryTree();
 }

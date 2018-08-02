@@ -12,6 +12,21 @@
     <script src="lib/layui/layui.js"></script>
     <script type="text/javascript" src="static/js/xadmin.js"></script>
     <script src="static/js/menu.js"></script>
+    <style>
+        /** 文件图标 */
+        .treeTable-icon .layui-icon-file:before {
+            content: "\e621";
+        }
+        /** 未展开 */
+        .treeTable-icon .layui-icon-layer:before {
+            content: "\e638";
+        }
+
+        /** 展开 */
+        .treeTable-icon.open .layui-icon-layer:before {
+            content: "\e638";
+        }
+    </style>
 </head>
 <body>
 <script type="text/html" id="toolbar">
@@ -21,7 +36,6 @@
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">系统管理</a>
         <a>
           <cite>菜单管理</cite></a>
       </span>
@@ -73,7 +87,7 @@
 </div>
 <div align="right" style="margin-right: 20px;margin-top: 10px">
     <div class="layui-btn-group">
-        <a class="layui-btn layui-btn-primary" href="javascript:;" data-method="addMenu" id="add">
+        <a class="layui-btn layui-btn-sm layui-btn-normal" href="javascript:;" data-method="addMenu" id="add">
             <i class="layui-icon">&#xe654;</i>新增
         </a>
         <!--  <button class="layui-btn layui-btn-primary">
@@ -84,6 +98,6 @@
           </button>-->
     </div>
 </div>
-    <table id="tbdata"></table>
+    <table id="tbdata" class="layui-table" lay-filter="table"></table>
 </body>
 </html>

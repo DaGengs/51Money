@@ -1,6 +1,6 @@
 $(function () {
    $.ajax({
-       url: "getUser.do",
+       url: "/sys/user/info.do",
        success: function (data) {
            $("#user_no").html(data.user_no);
            $("#user_no2").val(data.user_no);

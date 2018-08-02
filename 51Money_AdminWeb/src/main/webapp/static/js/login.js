@@ -7,7 +7,7 @@ layui.use(['layer', 'form'], function () {
 
     form.on('submit(login)', function (data) {
         $.ajax({
-            url: "/sys/login.do",
+            url: "/sys/user/login.do",
             type: "post",
             data: {
                 "username": $("#username").val(),
@@ -15,6 +15,7 @@ layui.use(['layer', 'form'], function () {
             },
             success: function (data) {
                 if (data.code == 0) {
+                    localStorage.setItem("user", data.data);
                     location.href = "index.html";
                 } else {
                     layer.msg(data.msg);

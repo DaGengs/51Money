@@ -3,15 +3,14 @@ layui.use(['form', 'table'], function(){
 
     table.render({
         elem: '#tbdata'
-        ,url: 'roleQueryByPage.do' //数据接口
+        ,url: '/sys/role/list.do' //数据接口
         ,page: true //开启分页
         ,cols: [[ //表头
             {field: 'role_id', align:'center',title: '角色ID', fixed: 'left'}
             ,{field: 'role_name', align:'center',title: '角色名称',}
-            ,{field: 'menu_name', align:'center',title: '权限名称', templet: '#menu_nameTpl'}
-            // ,{field: 'menu_p_name', title: '上级菜单',}
-            ,{field: 'menu_url', align:'center',title: '菜单路径',templet: '#menu_urlTpl'}
-            ,{field: 'menu_icon', align:'center',title: '菜单图标', templet: '#menu_iconTpl'}
+            ,{field: 'remark', align:'center',title: '说明'}
+            ,{field: 'create_user_id', align:'center',title: '创建人ID',templet: function(d){return d.create_user_id == '' ? "无" : d.create_user_id}}
+            ,{field: 'create_time', align:'center',title: '创建时间'}
             ,{fixed: 'right', width:150,align:'center',title: '操作', align:'center', toolbar: '#toolbar'}
         ]]
     });

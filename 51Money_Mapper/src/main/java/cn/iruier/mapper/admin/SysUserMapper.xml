@@ -15,6 +15,10 @@
         select <include refid="base"/> from sys_user where username = #{username}
     </select>
 
+    <select id="queryById" resultType="SysUser">
+        select <include refid="base"/> from sys_user where user_id = #{user_id}
+    </select>
+
     <select id="queryByPage" resultType="SysUser">
         select <include refid="base"/> from sys_user limit #{index}, #{size}
     </select>

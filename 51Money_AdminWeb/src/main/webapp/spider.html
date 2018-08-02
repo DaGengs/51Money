@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爬虫系统-51Money</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8 " />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="stylesheet" href="static/css/font.css">
+	<link rel="stylesheet" href="static/css/xadmin.css">
+    <script type="text/javascript" src="lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script>
+        function start() {
+            $.ajax({
+                url: "spiderStart.do",
+                success: function (data) {
+                    layer.msg(data.msg);
+                }
+            })
+        }
+
+        function stop() {
+            $.ajax({
+                url: "spiderStop.do",
+                success: function (data) {
+                    layer.msg(data.msg);
+                }
+            })
+        }
+
+        function create() {
+            $.ajax({
+                url: "createHtml.do",
+                success: function (data) {
+                    layer.msg(data.msg);
+                }
+            })
+        }
+    </script>
+</head>
+<body class="login-bg">
+    <div class="login layui-anim layui-anim-up">
+        <div class="message">数据爬虫</div>
+        <div id="darkbannerwrap"></div>
+        <hr class="hr20">
+        <input value="开始爬虫" style="width:100%;" type="button" onclick="start()">
+        <hr class="hr20">
+        <input value="停止爬虫" style="width:100%;" type="button" onclick="stop()">
+        <hr class="hr20" >
+        <input value="创建页面" style="width:100%;" type="button" onclick="create()">
+    </div>
+</body>
+</html>

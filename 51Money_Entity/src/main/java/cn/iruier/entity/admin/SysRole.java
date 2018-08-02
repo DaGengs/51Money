@@ -1,6 +1,7 @@
 package cn.iruier.entity.admin;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: iruier
@@ -8,10 +9,11 @@ import java.util.Date;
  */
 public class SysRole {
     private int role_id;
-    private int role_name;
+    private String role_name;
     private String remark;
     private int create_user_id;
     private Date create_time;
+    private List<Long> menuIdList;
 
     public int getRole_id() {
         return role_id;
@@ -21,11 +23,11 @@ public class SysRole {
         this.role_id = role_id;
     }
 
-    public int getRole_name() {
+    public String getRole_name() {
         return role_name;
     }
 
-    public void setRole_name(int role_name) {
+    public void setRole_name(String role_name) {
         this.role_name = role_name;
     }
 
@@ -51,5 +53,13 @@ public class SysRole {
 
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
+    }
+
+    public List<Long> getMenuIdList() {
+        return menuIdList;
+    }
+
+    public void setMenuIdList(List<Long> menuIdList) {
+        this.menuIdList = menuIdList;
     }
 }

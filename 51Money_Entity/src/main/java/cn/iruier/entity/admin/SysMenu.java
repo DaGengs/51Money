@@ -1,5 +1,7 @@
 package cn.iruier.entity.admin;
 
+import java.util.List;
+
 /**
  * @Author: iruier
  * @Date: 2018/7/30 21:16
@@ -13,6 +15,9 @@ public class SysMenu {
     private int type;
     private String icon;
     private int order_num;
+    private List<SysMenu> list;
+    private SysMenu parentMenu;
+    private List<SysMenu> children;
 
     public int getMenu_id() {
         return menu_id;
@@ -76,5 +81,29 @@ public class SysMenu {
 
     public void setOrder_num(int order_num) {
         this.order_num = order_num;
+    }
+
+    public List<SysMenu> getList() {
+        return list;
+    }
+
+    public void setList(List<SysMenu> list) {
+        this.list = list;
+    }
+
+    public SysMenu getParentMenu() {
+        return parentMenu;
+    }
+
+    public void setParentMenu(SysMenu parentMenu) {
+        this.parentMenu = parentMenu;
+    }
+
+    public List<SysMenu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SysMenu> children) {
+        this.children = children;
     }
 }

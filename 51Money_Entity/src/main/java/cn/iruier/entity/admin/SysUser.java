@@ -1,6 +1,7 @@
 package cn.iruier.entity.admin;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: iruier
@@ -15,6 +16,7 @@ public class SysUser {
     private int status;
     private int create_user_id;
     private Date create_time;
+    private List<Long> roleIdList;
 
     public int getUser_id() {
         return user_id;
@@ -78,5 +80,13 @@ public class SysUser {
 
     public void setCreate_time(Date create_time) {
         this.create_time = create_time;
+    }
+
+    public List<Long> getRoleIdList() {
+        return roleIdList;
+    }
+
+    public void setRoleIdList(List<Long> roleIdList) {
+        this.roleIdList = roleIdList;
     }
 }
