@@ -155,17 +155,4 @@ layui.use(['form', 'table'], function(){
         var othis = $(this), method = othis.data('method');
         active[method] ? active[method].call(this, othis) : '';
     });
-    initData();
-    function initData() {
-        $.ajax({
-            url: "roleQueryAll.do",
-            success: function (data) {
-                console.log(data);
-                for (var i = 0; i < data.length; i++) {
-                    $("#roleList").append("<input type='checkbox' name='role' value='"+data[i].role_id+"' title='"+data[i].role_name+"' lay-skin='primary'>");
-                    form.render("checkbox");
-                }
-            }
-        });
-    };
 });

@@ -20,4 +20,8 @@ public interface UserInfoMapper {
     @Update("update t_userinfo set status = #{status} where user_id = #{user_id}")
     @ResultType(Integer.class)
     int update(@Param("user_id") int user_id,@Param("status") int status);
+
+    @Select("select count(*) from t_userinfo")
+    @ResultType(Integer.class)
+    int queryCount();
 }

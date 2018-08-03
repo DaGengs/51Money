@@ -46,36 +46,6 @@ layui.use(['form', 'table', 'tree', 'treetable'], function(){
         ]]
     });
 
-  /*  table.render({
-        elem: '#tbdata'
-        ,url: '/sys/menu/list.do' //数据接口
-        ,page: true //开启分页
-        ,cols: [[ //表头
-            {field: 'menu_id', align:'center',title: 'ID', fixed: 'left'}
-            ,{field: 'name', align:'center',title: '菜单名称',}
-            ,{field: 'url',align:'center', title: '菜单路径',templet: function(d){return d.url == '' ? "无" : d.url}}
-            ,{field: 'perms', align:'center',title: '权限',templet: function(d){return d.perms == '' ? "无" : d.perms}}
-            ,{field: 'type', align:'center',title: '类型',templet: function (obj) {
-                    var r;
-                    switch (obj.type) {
-                        case 0:
-                            r = "<span class='layui-badge layui-bg-orange'>目录</span>";
-                            break;
-                        case 1:
-                            r = "<span class='layui-badge layui-bg-green'>菜单</span>";
-                            break;
-                        case 2:
-                            r = "<span class='layui-badge layui-bg-blue'>按钮</span>";
-                            break;
-                    }
-                    return r;
-                }}
-            ,{field: 'icon', align:'center',title: '菜单图标', templet: '<i class="layui-icon">{{ d.icon }}</i>'}
-            ,{field: 'order_num', align:'center',title: '排序规则'}
-            ,{fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#toolbar'}
-        ]]
-    });
-*/
     var active = {
         addMenu: function () {
             //示范一个公告层
@@ -133,17 +103,5 @@ layui.use(['form', 'table', 'tree', 'treetable'], function(){
         var othis = $(this), method = othis.data('method');
         active[method] ? active[method].call(this, othis) : '';
     });
-   /* initData();
-    function initData() {
-        $.ajax({
-            url: "menuQueryAll.do",
-            success: function (data) {
-                console.log(data);
-                for (var i = 0; i < data.length; i++) {
-                    $("#menu_p_name").append("<option value='"+data[i].menu_id+"'>"+data[i].menu_name+"</option>");
-                }
-                form.render("select");
-            }
-        })
-    }*/
+
 });

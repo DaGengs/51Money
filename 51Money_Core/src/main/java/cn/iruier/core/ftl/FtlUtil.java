@@ -3,7 +3,6 @@ package cn.iruier.core.ftl;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;

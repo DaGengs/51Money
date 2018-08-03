@@ -142,17 +142,5 @@ layui.use(['form', 'table'], function(){
         var othis = $(this), method = othis.data('method');
         active[method] ? active[method].call(this, othis) : '';
     });
-    initData();
-    function initData() {
-        $.ajax({
-            url: "menuQueryAll.do",
-            success: function (data) {
-                console.log(data);
-                for (var i = 0; i < data.length; i++) {
-                    $("#menuList").append("<input type='checkbox' name='menu' value='"+data[i].menu_id+"' title='"+data[i].menu_name+"' lay-skin='primary'>");
-                }
-                form.render("checkbox");
-            }
-        })
-    }
+
 });
