@@ -13,6 +13,8 @@ import cn.iruier.service.admin.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author: iruier
  * @Date: 2018/8/2 11:27
@@ -51,5 +53,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public ResultVo updateRiskStatus(int user_id, int status) {
         return ExecuteUtil.getResult(riskMapper.update(user_id, status), "风控资料审核");
+    }
+
+    @Override
+    public List<Risk> queryByUid(int user_id) {
+        return riskMapper.queryByUid(user_id);
     }
 }
