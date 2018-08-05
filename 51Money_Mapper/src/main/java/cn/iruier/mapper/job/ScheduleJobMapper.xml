@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.iruier.mapper.job.ScheduleJobMapper">
+
+    <sql id="base">
+        job_id,bean_name,method_name,params,cron_expression,status,remark,create_time
+    </sql>
+
+    <insert id="insert" parameterType="ScheduleJob" useGeneratedKeys="true" keyProperty="job_id" keyColumn="job_id">
+        insert into t_schedulejob(bean_name, method_name, params, cron_expression, status, remark, create_time) values(#{bean_name},#{method_name},#{params},#{cron_expression},1,#{remark},now())
+    </insert>
+
+    <delete id="deleteBatch">
+        delete from t_schedulejob where job_id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="queryById" resultType="ScheduleJob">
+        select <include refid="base"/> from t_schedulejob where job_id = #{job_id}
+    </select>
+
+    <update id="update" parameterType="ScheduleJob">
+        update t_schedulejob
+        <set>
+            <if test="bean_name != null">
+                bean_name = #{bean_name}
+            </if>
+            <if test="method_name != null">
+                method_name = #{method_name}
+            </if>
+            <if test="params != null">
+                params = #{params}
+            </if>
+            <if test="cron_expression != null">
+                cron_expression = #{cron_expression}
+            </if>
+            <if test="remark != null">
+                remark = #{remark}
+            </if>
+
+        </set>
+        <where>
+            <if test="job_id != 0">
+                job_id = #{job_id}
+            </if>
+        </where>
+    </update>
+
+    <select id="queryByPage" resultType="ScheduleJob">
+        select <include refid="base"/> from t_schedulejob limit #{index}, #{size}
+    </select>
+
+    <select id="queryCount" resultType="Integer">
+        select COUNT(*) from t_schedulejob
+    </select>
+
+    <update id="updateStatus">
+        update t_schedulejob set status = #{status} where job_id = #{job_id}
+    </update>
+</mapper>

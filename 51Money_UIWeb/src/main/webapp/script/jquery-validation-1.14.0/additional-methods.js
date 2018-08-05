@@ -521,7 +521,7 @@ $.validator.addMethod("iban", function(value, element) {
 		}
 	}
 
-	// now check the checksum, first convert to digits
+	// now check the checksum, first converter to digits
 	ibancheck = iban.substring(4, iban.length) + iban.substring(0, 4);
 	for (i = 0; i < ibancheck.length; i++) {
 		charAt = ibancheck.charAt(i);

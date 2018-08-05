@@ -1,7 +1,5 @@
 package cn.iruier.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,7 +9,6 @@ public class UserInfo implements Serializable {
     private String realName;
     private String idNumber;
     private int gender;
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     private String address;
     private String idCardImg_pre;

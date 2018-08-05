@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/newstyle.css"/>
     <link rel="stylesheet" href="css/user.css"/>
     <script type="text/javascript" src="script/jquery.min.js"></script>
-
+    <script type="text/javascript" src="script/common.js"></script>
     <style type="text/css">
         .my-list-group li {
             list-style: disc inside none;
@@ -79,7 +79,7 @@
                             <div class="text-center">
                                 <c:choose>
                                     <c:when test="${ userInfo.isBasicInfo && userInfo.isRealAuth && (userInfo.authScore >= creditBorrowScore) && userInfo.isVedioAuth}">
-                                        <a href="borrow_apply" class="btn btn-primary">
+                                        <a href="borrow_apply.html" class="btn btn-primary">
                                             申请贷款
                                         </a>
                                     </c:when>
@@ -150,5 +150,20 @@
 </div>
 
 <script src="script/foot.js"></script>
+
+<script>
+    $(function () {
+        $.ajax({
+            url: "http://localhost:81/loan/getLoan.do",
+            data: {"account_id": 0},
+            success: function (data) {
+                console.log(data);
+                if (data != null) {
+                    location.href = "borrow_apply_result.html";
+                }
+            }
+        })
+    })
+</script>
 </body>
 </html>

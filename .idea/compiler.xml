@@ -11,6 +11,7 @@
         <module name="51Money_Core" />
         <module name="51Money_Entity" />
         <module name="51Money_Mapper" />
+        <module name="51Money_MsgController" />
         <module name="51Money_Provider" />
         <module name="51Money_Service" />
         <module name="51Money_Spider" />

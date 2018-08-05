@@ -15,7 +15,7 @@
 		
 	<!-- 扫描mybatis注解 -->
 	<mybatis:scan base-package="cn.iruier.mapper"/>
-	
+
 	<!-- 加载jdbc配置文件 -->
 	<context:property-placeholder location="classpath:*-config.properties"/>
 	

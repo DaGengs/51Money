@@ -11,7 +11,7 @@
     <link href="css/common.css" rel="stylesheet">
     <link rel="stylesheet" href="css/user.css"/>
     <script type="text/javascript" src="script/jquery.min.js"></script>
-
+    <script type="text/javascript" src="script/common.js"></script>
     <script src="script/jquery-validation-1.14.0/jquery.validate.js"></script>
     <script src="script/jquery-validation-1.14.0/localization/messages_zh.js"></script>
     <script src="script/jquery.form.js"></script>
@@ -46,20 +46,20 @@
             <div class="panel-heading">
                 <h3 class="panel-title">
                     信用借款
-                    <span class="text-info">可借金额：</span><span class="text-danger">${account.remainBorrowLimit}</span>
+                    <span class="text-info">可借金额：</span><span class="text-danger">8000</span>
                     <label class="label label-primary">信用标</label>
                 </h3>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal el-borrow-form" id="borrowForm" novalidate="novalidate" method="post"
-                      action="borrow_apply_save">
+                <form class="form-horizontal el-borrow-form" id="borrowForm" novalidate="novalidate"
+                      >
                     <div class="form-group">
                         <label class="col-sm-3 control-label">
                             借款金额
                         </label>
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input class="form-control" name="bidRequestAmount" id="bidRequestAmount"/>
+                                <input class="form-control" name="money" id="money"/>
                                 <span class="input-group-addon">元</span>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         </label>
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input class="form-control" name="currentRate"/>
+                                <input class="form-control" name="rate"/>
                                 <span class="input-group-addon">%</span>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                         </label>
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <select class="form-control" name="monthes2Return">
+                                <select class="form-control" name="monthes">
                                     <option value="1">1</option>
                                     <option value="3">3</option>
                                     <option value="6">6</option>
@@ -112,7 +112,7 @@
                         </label>
                         <div class="col-sm-3">
                             <div class="input-group">
-                                <input class="form-control" name="minBidAmount"/>
+                                <input class="form-control" name="minMoney"/>
                                 <span class="input-group-addon">元</span>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary col-lg-offset-3" type="submit" data-loading-text="提交">
+                        <button class="btn btn-primary col-lg-offset-3" type="button" id="commit" data-loading-text="提交">
                             提交申请
                         </button>
                     </div>
@@ -180,13 +180,25 @@
 
 <script type="text/javascript">
     $(function(){
+
+        $.ajax({
+            url: "http://localhost:81/loan/getLoan.do",
+            data: {"account_id": 0},
+            success: function (data) {
+                console.log(data);
+                if (data != null) {
+                    location.href = "borrow_apply_result.html";
+                }
+            }
+        });
+
         $("#borrowForm").validate({
             rules : {
                 bidRequestAmount:{
                     required:true,
                     number:true,
-                    min:${minBidRequestAmount},
-                    max:${account.remainBorrowLimit}
+                    min:100,
+                    max:8000
                 },
                 currentRate:{
                     required:true,
@@ -197,7 +209,7 @@
                 minBidAmount:{
                     required:true,
                     number:true,
-                    min:${minBidAmount}
+                    min:2000
                 },
                 title:"required"
             },
@@ -236,6 +248,21 @@
                 $(input).closest(".form-group").removeClass("has-error");
             }
         });
+
+        $("#commit").click(function () {
+            $.ajax({
+                url: "http://localhost:81/loan/save.do",
+                type: "post",
+                data: $("#borrowForm").serialize(),
+                success: function (data) {
+                    if (data.code == 0) {
+                        location.href = "borrow_apply_result.html";
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            })
+        })
     });
 </script>
 </body>

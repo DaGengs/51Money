@@ -3,9 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="userInfosConsumer"></dubbo:application>
+    <dubbo:application name="Consumer"></dubbo:application>
 
     <dubbo:registry address="47.104.243.145:2181" protocol="zookeeper" check="false"></dubbo:registry>
 
     <dubbo:reference interface="cn.iruier.service.user.UserInfoService" id="userInfoProvider" version="1.0"></dubbo:reference>
+    <dubbo:reference interface="cn.iruier.service.user.RiskService" id="riskProvider" version="1.0"></dubbo:reference>
+    <dubbo:reference interface="cn.iruier.service.user.AccountService" id="accountProvider" version="1.0"></dubbo:reference>
+    <dubbo:reference interface="cn.iruier.service.loan.LoanService" id="loanProvider" version="1.0"></dubbo:reference>
+    <dubbo:reference interface="cn.iruier.service.activemq.ActiveMQService" id="activeMQProvider" version="1.0"></dubbo:reference>
 </beans>

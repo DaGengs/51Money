@@ -889,7 +889,7 @@
     };
 
     /**
-     * Walk through each property and convert them into
+     * Walk through each property and converter them into
      * getter/setters. This method should only be called when
      * value type is Object.
      */
@@ -2237,7 +2237,7 @@
                     // essentially merged when rendered to HTML strings
                     res[lastIndex] = createTextVNode(last.text + c);
                 } else if (c !== '') {
-                    // convert primitive to vnode
+                    // converter primitive to vnode
                     res.push(createTextVNode(c));
                 }
             } else {
@@ -10873,7 +10873,7 @@
         }
 
         var options = this.$options;
-        // resolve template/el and convert to render function
+        // resolve template/el and converter to render function
         if (!options.render) {
             var template = options.template;
             if (template) {

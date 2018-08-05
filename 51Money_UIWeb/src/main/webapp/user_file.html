@@ -1,5 +1,5 @@
 <!DOCTYPE html >
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>91Money平台</title>
@@ -13,23 +13,24 @@
     <script type="text/javascript" src="script/jquery.min.js"></script>
     <script type="text/javascript" src="script/jquery.form.js"></script>
     <script type="text/javascript" src="script/webuploader-0.1.5/webuploader.min.js"></script>
-
+    <script type="text/javascript" src="script/vue.js"></script>
     <script type="text/javascript" src="script/common.js"></script>
-    <script type="text/javascript" src="script/user.js" ></script>
+    <script type="text/javascript" src="script/layer/layer.js"></script>
+    <script type="text/javascript" src="script/user.js"></script>
 
 
     <style>
-        .file-item.thumbnail, .file-item.thumbnail image{
+        .file-item.thumbnail, .file-item.thumbnail image {
             width: 300px;
             height: 240px;
         }
 
-        .upload-state-done{
+        .upload-state-done {
             border: #0fa24e 3px dashed;
             background-color: rgba(16, 253, 107, 0.16);
         }
 
-        #uploader-demo{
+        #uploader-demo {
             margin-bottom: 10px;
         }
 
@@ -48,25 +49,50 @@
             <div class=" panel panel-default">
                 <div class="panel-heading">风控资料</div>
                 <div class="panel-body">
-
-                    <c:forEach items="${userFiles}" var="file">
-                        <div class="col-sm-6 col-md-4">
-                            <div class="thumbnail">
-                                <img src="${file.file}"/>
+                    <div class="row">
+                        <div class="col-md-6" id="riskInfo">
+                            <div class="thumbnail col-md-6" v-for="risk in risks">
+                                <img v-bind:src="risk.imgUrl"/>
                                 <div class="caption">
-                                    <h4>${file.fileType.title}</h4>
-                                    <p>得分：${file.score} &nbsp;&nbsp;状态：${file.stateDisplay}</p>
+                                    <h3 style="font-weight: bold" align="center" v-if="risk.type == 1">房产证</h3>
+                                    <h4 style="font-weight: bold" align="center" v-else-if="risk.type == 2">车</h4>
+                                    <h4 style="font-weight: bold" align="center" v-else-if="risk.type == 3">股票</h4>
+                                    <h4 style="font-weight: bold" align="center" v-else-if="risk.type == 4">保单</h4>
+                                    <h4 style="font-weight: bold" align="center" v-else="risk.type == 5">工作证明</h4>
+                                    <br/>
+                                    <h3 align="center" style="font-weight: bold">得分：{{risk.score}} &nbsp;&nbsp;状态：{{risk.status == 0 ? "未审核" : "已审核"}}</h3>
                                 </div>
                             </div>
                         </div>
-                    </c:forEach>
-                    <!--dom结构部分-->
-                    <div id="uploader-demo">
-                        <!--用来存放item-->
-                        <div id="fileList" class="uploader-list"></div>
-                        <div id="filePicker">上传风控资料</div>
                     </div>
+                    <!--dom结构部分-->
+                    <form id="form">
+                        <div class="form-group">
+                            <label class="control-label">
+                                资料类型
+                            </label>
+                            <div style="width: 200px; margin-left: 60px; margin-top: -30px">
+                                <select class="form-control" id="type" name="type">
+                                    <option value="0">--可选择多个依次上传--</option>
+                                    <option value="1">房产证</option>
+                                    <option value="2">车</option>
+                                    <option value="3">股票</option>
+                                    <option value="4">保单</option>
+                                    <option value="5">工作证明</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="uploader-demo">
+                            <!--用来存放item-->
+                            <div id="fileList" class="uploader-list"></div>
+                            <div id="filePicker">上传风控资料</div>
 
+                        </div>
+                        <div id="saveBtn" style="margin-left: 150px;margin-top: -55px;position: absolute;z-index: 1">
+                            <button id="save" type="button" disabled class="btn btn-success" style="height: 40px;cursor: pointer;">确认提交
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -80,29 +106,30 @@
 
 <script>
 
-    $(function(){
+    $(function () {
 
         // 初始化Web Uploader
         var uploader = WebUploader.create(getOption('filePicker'))
-            .on( 'fileQueued', function( file ) {
-                fileQueued(file, 'fileList',uploader );
+            .on('fileQueued', function (file) {
+                fileQueued(file, 'fileList', uploader);
             })
-            .on( 'uploadSuccess', function( file, response ) {
+            .on('uploadSuccess', function (file, response) {
                 uploadSuccess(file, response, 'uploadImage');
             })
-            .on( 'uploadProgress', function( file, percentage ) {
+            .on('uploadProgress', function (file, percentage) {
                 uploadProgress(file, percentage);
             });
 
 
         //基本配置
-        function getOption(pickId){
+        function getOption(pickId) {
             return {
                 auto: true,// 选完文件后，是否自动上传。
                 swf: 'script/webuploader-0.1.5/Uploader.swf',// swf文件路径
-                server: 'user_file_upload',// 文件接收服务端。
+                server: 'http://localhost:81/riskCommit.do',// 文件接收服务端。
+                fromData: {"fileType": 1},
                 pick: {
-                    id:'#' + pickId
+                    id: '#' + pickId
                 },// 选择文件的按钮。可选。内部根据当前运行是创建，可能是input元素，也可能是flash
                 accept: {// 只允许选择图片文件。
                     title: 'Images',
@@ -112,8 +139,13 @@
             }
         }
 
+        uploader.on('uploadBeforeSend', function (object, data, header) {
+            /*携带参数*/
+            data.fileType = $("#type").val();
+        });
+
         //显示缩略图
-        function fileQueued( file , listId, uploader) {
+        function fileQueued(file, listId, uploader) {
             var $li = $(
                 '<div id="' + file.id + '" class="file-item thumbnail">' +
                 '<img>' +
@@ -123,38 +155,66 @@
             var $img = $li.find('img');
             // $list为容器jQuery实例
             var $list = $('#' + listId);
-            $list.append( $li );
-            uploader.makeThumb( file, function( error, src ) {
-                if ( error ) {
+            $list.append($li);
+            uploader.makeThumb(file, function (error, src) {
+                if (error) {
                     $img.replaceWith('<span>不能预览</span>');
                     return;
                 }
-                $img.attr( 'src', src );//给图片的地址赋值
-            }, 300, 200 );
+                $img.attr('src', src);//给图片的地址赋值
+            }, 300, 220);
         }
 
         //成功后的页面处理
-        function uploadSuccess( file, response, imageInputId ) {
-            $( '#'+file.id ).addClass('upload-state-done');
-            window.location.reload();
+        function uploadSuccess(file, response, imageInputId) {
+            $('#' + file.id).addClass('upload-state-done');
+            layer.msg("上传成功");
+            $("#save").removeAttr("disabled");
         }
 
-        function uploadProgress(file, percentage){
-            var $li = $( '#'+file.id );
+        function uploadProgress(file, percentage) {
+            var $li = $('#' + file.id);
             var $percent = $li.find('.progress');
 
             // 避免重复创建
-            if ( !$percent.length ) {
+            if (!$percent.length) {
                 $percent = $('<div class="progress" style="height:3px;">\n' +
-                    '  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="'+percentage * 100+'" aria-valuemin="0" aria-valuemax="100" style="width: '+percentage * 100+'%;">\n' +
-                    '    <span class="sr-only">'+percentage * 100+' Complete</span>\n' +
+                    '  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="' + percentage * 100 + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + percentage * 100 + '%;">\n' +
+                    '    <span class="sr-only">' + percentage * 100 + ' Complete</span>\n' +
                     '  </div>\n' +
                     '</div>')
-                    .appendTo( $li )
+                    .appendTo($li)
                     .find('span');
             }
         }
+
+        $("#save").click(function () {
+            $("#form").hide();
+            $("#saveBtn").hide();
+            layer.alert("提交成功");
+        })
+
+        $.ajax({
+            url: "http://localhost:81/riskList.do",
+            // data: {"user_id": user.id},
+            // xhrFields: {withCredentials: true},
+            success: function (riskInfo) {
+                if (riskInfo != "") {
+                    $("#form").hide();
+                }
+                if (riskInfo == "") {
+                    $("#riskInfo").hide();
+                }
+                new Vue({
+                    el: '#riskInfo',
+                    data: {
+                        risks: riskInfo,
+                    }
+                });
+            }
+        });
     })
+
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package cn.iruier.convert;
+package cn.iruier.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

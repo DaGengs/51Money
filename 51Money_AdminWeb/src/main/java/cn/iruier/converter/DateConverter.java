@@ -1,4 +1,4 @@
-package cn.iruier.convert;
+package cn.iruier.converter;
 
 import org.springframework.core.convert.converter.Converter;
 

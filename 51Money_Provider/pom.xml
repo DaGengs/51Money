@@ -19,6 +19,12 @@
             <artifactId>51Money_Service</artifactId>
             <version>1.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.iruier</groupId>
+            <artifactId>51Money_Mapper</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -34,6 +40,20 @@
                     <server>tomcat7</server>
                 </configuration>
             </plugin>
+
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    &lt;!&ndash;在打包时相关的类会以附件的形式被独立打成jar &ndash;&gt;
+                    <attachClasses>true</attachClasses>
+                    <classesClassifier>api</classesClassifier>
+                </configuration>
+                <version>2.4</version>
+                <executions>
+                </executions>
+            </plugin>-->
+
         </plugins>
     </build>
 </project>

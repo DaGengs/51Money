@@ -13,7 +13,7 @@
 	<context:component-scan
 		base-package="cn.iruier.controller"></context:component-scan>
 
-    <bean id="dateMapper" class="cn.iruier.convert.DateMapper"></bean>
+    <bean id="dateMapper" class="cn.iruier.converter.DateMapper"></bean>
 	<!-- 放行静态资源 -->
 	<mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
@@ -30,7 +30,7 @@
         <property name="converters">
             <list>
                 <!--自定义转换器 -->
-                <bean class="cn.iruier.convert.DateConverter"></bean>
+                <bean class="cn.iruier.converter.DateConverter"></bean>
             </list>
         </property>
     </bean>

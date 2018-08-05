@@ -2,6 +2,8 @@ package cn.iruier.service.admin;
 
 import cn.iruier.core.vo.PageVo;
 import cn.iruier.core.vo.ResultVo;
+import cn.iruier.core.vo.UserRiskVo;
+import cn.iruier.entity.user.Risk;
 import cn.iruier.entity.user.UserInfo;
 
 /**
@@ -12,4 +14,8 @@ public interface AuthService {
     PageVo<UserInfo> queryByPage(int page, int size);
 
     ResultVo update(int user_id, int status);
+
+    PageVo<UserRiskVo> queryRisk(int page, int size);
+
+    ResultVo updateRiskStatus(int user_id, int status);
 }

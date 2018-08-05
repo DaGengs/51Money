@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="ssoConsumer"></dubbo:application>
+    <dubbo:application name="Consumer"></dubbo:application>
 
     <dubbo:registry address="47.104.243.145:2181" protocol="zookeeper" check="false"></dubbo:registry>
 

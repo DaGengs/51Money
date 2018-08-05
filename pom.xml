@@ -21,6 +21,7 @@
         <module>51Money_SSOProvider</module>
         <module>51Money_SSOController</module>
         <module>51Money_Spider</module>
+        <module>51Money_MsgController</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -52,6 +53,11 @@
         <webmagic-core.version>0.7.3</webmagic-core.version>
         <webmagic-extension.version>0.7.3</webmagic-extension.version>
         <freemarker.version>2.3.28</freemarker.version>
+        <quartz.version>2.3.0</quartz.version>
+        <!--<spring-context.version>5.0.7.RELEASE</spring-context.version>-->
+        <activemq.version>5.15.4</activemq.version>
+        <spring-jms.version>5.0.7.RELEASE</spring-jms.version>
+        <jms-api.version>2.0.1</jms-api.version>
     </properties>
 
     <!--限定版本号-->
@@ -214,6 +220,41 @@
                 <version>${freemarker.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-client</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-spring</artifactId>
+                <version>${activemq.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${spring-jms.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.jms</groupId>
+                <artifactId>javax.jms-api</artifactId>
+                <version>${jms-api.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

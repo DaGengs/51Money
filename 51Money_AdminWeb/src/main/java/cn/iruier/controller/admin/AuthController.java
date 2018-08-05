@@ -2,6 +2,7 @@ package cn.iruier.controller.admin;
 
 import cn.iruier.core.vo.PageVo;
 import cn.iruier.core.vo.ResultVo;
+import cn.iruier.core.vo.UserRiskVo;
 import cn.iruier.entity.user.UserInfo;
 import cn.iruier.service.admin.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,17 @@ public class AuthController {
 
     @GetMapping("/update")
     public ResultVo update(int user_id, int status) {
+
         return service.update(user_id, status);
+    }
+
+    @GetMapping("/riskList")
+    public PageVo<UserRiskVo> queryRiskList(int page, int limit) {
+        return service.queryRisk(page, limit);
+    }
+
+    @GetMapping("/updateRiskStatus")
+    public ResultVo updateRisk(int user_id, int status) {
+        return service.updateRiskStatus(user_id, status);
     }
 }

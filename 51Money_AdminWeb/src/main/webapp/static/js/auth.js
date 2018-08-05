@@ -9,7 +9,21 @@ layui.use(['form', 'table'], function(){
             {field: 'user_id', width:'5%',align:'center',title: '用户ID', fixed: 'left'}
             ,{field: 'realName', width:'10%',align:'center', title: '真实姓名',}
             ,{field: 'idNumber', align:'center',title: '身份证号',}
-            ,{field: 'gender', width:'5%', align:'center',title: '性别',templet: function (obj) {return obj.gender == 1 ? '男' : '女'}}
+            ,{field: 'gender', width:'5%', align:'center',title: '性别',templet: function (obj) {
+                var r;
+                    switch (obj.gender) {
+                        case 1:
+                            r = "<span>男</span>";
+                            break;
+                        case 2:
+                            r = "<span>女</span>";
+                            break;
+                        default:
+                            r = "<span></span>";
+                            break;
+                    }
+                    return r;
+            }}
             ,{field: 'birthday', width:'10%',align:'center',title: '出生日期'}
             ,{field: 'address', width:'20%',align:'center',title: '地址'}
             ,{field: 'idCardImg_pre', align:'center',title: '身份证正面', templet: function (obj) {

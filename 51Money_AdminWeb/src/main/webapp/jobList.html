@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="lib/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" media="all"/>
+    <link rel="stylesheet" href="static/css/font.css">
+    <link rel="stylesheet" href="static/css/xadmin.css">
+    <script src="lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="lib/layui/layui.js"></script>
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script src="static/js/job.js"></script>
+</head>
+<body>
+<script type="text/html" id="toolbar">
+        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="begin"><i class="layui-icon">&#xe652;</i>开始</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delete"><i class="layui-icon">&#xe640;</i>删除</a>
+            <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="pause"><i class="layui-icon">&#xe652;</i>暂停</a>
+            <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="resume"><i class="layui-icon">&#xe652;</i>恢复</a>
+</script>
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a>
+          <cite>作业管理</cite></a>
+      </span>
+    <a style="float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="iconfont" style="line-height:30px">&#xe6aa;</i></a>
+</div>
+<div style="margin-top: 10px;margin-right: 20px" align="right">
+    <span>批量操作：  </span>
+    <div class="layui-btn-group demoTable">
+        <a class="layui-btn layui-btn-sm layui-btn" href="javascript:;" data-method="addJob" id="add">
+            <i class="layui-icon">&#xe654;</i>新增任务
+        </a>
+        <button class="layui-btn layui-btn-sm layui-btn-normal" data-type="startBatch">
+            <i class="layui-icon">&#xe652;</i>开始任务
+        </button>
+        <button class="layui-btn layui-btn-sm layui-btn-warm" data-type="pauseBatch">
+            <i class="layui-icon">&#xe651;</i>暂停任务
+        </button>
+        <button class="layui-btn layui-btn-sm layui-btn-normal" data-type="resumeBatch">
+            <i class="layui-icon">&#xe652;</i>恢复任务
+        </button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger" data-type="delBatch">
+            <i class="layui-icon">&#xe640;</i>删除任务
+        </button>
+    </div>
+</div>
+<div>
+    <table id="tbdata" lay-filter="tbop"></table>
+</div>
+</body>
+<div style="display: none;" id="addModel">
+    <form class="layui-form" id="formData">
+        <div style="margin-top: 30px;margin-left: 20px">
+            <div class="layui-form-item">
+                <label class="layui-form-label">bean名称</label>
+                <div class="layui-input-inline" style="width: 300px">
+                    <input type="text" name="bean_name" lay-verify="required" placeholder="spring bean名称，如：testTask" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">方法名称</label>
+                <div class="layui-input-inline" style="width: 300px">
+                    <input type="text" name="method_name" lay-verify="required" placeholder="方法名称"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">参数</label>
+                <div class="layui-input-inline" style="width: 300px">
+                    <input type="text" name="params" lay-verify="required" placeholder="参数 "
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">cron表达式</label>
+                <div class="layui-input-inline" style="width: 300px">
+                    <input type="text" name="cron_expression" lay-verify="required" placeholder="如：0 0 12 * * ?"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-inline" style="width: 300px">
+                    <input type="text" name="remark" lay-verify="required" placeholder="备注信息"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</html>

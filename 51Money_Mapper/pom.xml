@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.iruier</groupId>
-            <artifactId>51Money_Entity</artifactId>
+            <artifactId>51Money_Core</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
