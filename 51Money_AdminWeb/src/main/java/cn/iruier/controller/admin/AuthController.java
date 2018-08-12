@@ -60,27 +60,27 @@ public class AuthController {
     public ResultVo updateRisk(int user_id, int status) {
         List<Risk> risks = service.queryByUid(user_id);
         Account account = new Account();
-        int totalMoney = 0;
+        int carditMoney = 0;
         for (Risk risk : risks) {
             switch (risk.getType()) {
                 case 1:
-                    totalMoney = totalMoney + risk.getScore() * 500;
+                    carditMoney = carditMoney + risk.getScore() * 500;
                     break;
                 case 2:
-                    totalMoney = totalMoney + risk.getScore() * 400;
+                    carditMoney = carditMoney + risk.getScore() * 400;
                     break;
                 case 3:
-                    totalMoney = totalMoney + risk.getScore() * 300;
+                    carditMoney = carditMoney + risk.getScore() * 300;
                     break;
                 case 4:
-                    totalMoney = totalMoney + risk.getScore() * 200;
+                    carditMoney = carditMoney + risk.getScore() * 200;
                     break;
                 case 5:
-                    totalMoney = totalMoney + risk.getScore() * 100;
+                    carditMoney = carditMoney + risk.getScore() * 100;
                     break;
             }
             account.setUser_id(user_id);
-            account.setTotalMoney(totalMoney);
+            account.setCarditMoney(carditMoney);
             accountService.update(account);
         }
         return service.updateRiskStatus(user_id, status);

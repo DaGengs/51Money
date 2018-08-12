@@ -1,5 +1,11 @@
-layui.use(['form', 'table'], function(){
-    var form = layui.form, table = layui.table;
+layui.config({
+    base: 'lib/',
+}).extend({
+    authtree: 'authtree/authtree',
+});
+
+layui.use(['form', 'table', 'authtree'], function(){
+    var form = layui.form, table = layui.table, authtree = layui.authtree;
 
     table.render({
         elem: '#tbdata'
@@ -18,8 +24,9 @@ layui.use(['form', 'table'], function(){
     table.on('tool(tbop)', function(obj){
         var layEvent = obj.event;
         var data = obj.data;
-        console.log(data);
-        if (layEvent == 'addMenu') {
+        $("#role_name").val(data.role_name);
+        $("#remark").val(data.remark);
+        if (layEvent == 'edit') {
             layer.open({
                 type: 1
                 ,
@@ -27,7 +34,11 @@ layui.use(['form', 'table'], function(){
                 ,
                 closeBtn: 2
                 ,
-                area: '500px'
+                fixed: false
+                ,
+                area: '800px'
+                ,
+                offset: '100px'
                 ,
                 shade: 0.8
                 ,
@@ -42,13 +53,8 @@ layui.use(['form', 'table'], function(){
                 content: $("#menuModel")
                 ,
                 yes: function (index, layero) {
-                    var menu_id=$("input[name='menu']");
-                    var menu_ids = [];
-                    for(var i in menu_id){
-                        if(menu_id[i].checked)
-                            menu_ids.push(menu_id[i].value);
-                    }
-                    var ids = {role_id: data.role_id, menu_ids: menu_ids};
+                    console.log(menu_ids);
+                 /*   var ids = {role_id: data.role_id, menu_ids: menu_ids};
                     $.ajax({
                         url: "updateMyMenu.do",
                         type: "post",
@@ -60,7 +66,7 @@ layui.use(['form', 'table'], function(){
                                 layer.msg(data.message);
                             }
                         }
-                    })
+                    })*/
                 },
                 btn2: function(){
                     location.reload();
@@ -87,7 +93,7 @@ layui.use(['form', 'table'], function(){
 
     var active = {
         addRole: function () {
-            //示范一个公告层
+            $("#formData")[0].reset();
             layer.open({
                 type: 1
                 ,
@@ -95,9 +101,13 @@ layui.use(['form', 'table'], function(){
                 ,
                 closeBtn: 2
                 ,
-                area: '360px'
+                area: '800px'
+                ,
+                fixed: false
                 ,
                 shade: 0.8
+                ,
+                offset: '100px'
                 ,
                 id: 'LAY_layuipro' //设定一个id，防止重复弹出
                 ,
@@ -107,16 +117,23 @@ layui.use(['form', 'table'], function(){
                 ,
                 moveType: 1 //拖拽模式，0或者1
                 ,
-                content: $("#addModel")
+                content: $("#menuModel")
                 ,
                 yes: function (index, layero) {
                     var role_name = $("#role_name").val();
+                    var remark = $("#remark").val();
 
                     if (role_name == "") {
                         layer.msg("请输入角色名称");
                         return false;
                     }
-                    $.ajax({
+                    if (remark == "") {
+                        layer.msg("请输入角色说明");
+                        return false;
+                    }
+
+                    console.log(menu_ids);
+                  /*  $.ajax({
                         url: "saveRole.do",
                         type: "post",
                         data: {
@@ -129,7 +146,7 @@ layui.use(['form', 'table'], function(){
                                 layer.msg(data.message);
                             }
                         }
-                    });
+                    });*/
                 },
                 btn2: function(){
                     location.reload();
@@ -143,4 +160,20 @@ layui.use(['form', 'table'], function(){
         active[method] ? active[method].call(this, othis) : '';
     });
 
+    initData();
+
+    function initData() {
+        $.ajax({
+            url: "/sys/menu/getMenuTree.do",
+            success: function (data) {
+                authtree.render('#menuList', data.data, {inputname: 'authids[]', layfilter: 'lay-check-auth', openall: false});
+            }
+        })
+    };
+
+    form.on('checkbox(lay-check-auth)', function(data){
+        // 获取所有已选中节点
+        menu_ids = authtree.getChecked('#menuList');
+
+    });
 });

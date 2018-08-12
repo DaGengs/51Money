@@ -26,6 +26,11 @@ public class JedisUtil {
     public void addStr(String key,String value){
         jedis.set(key,value);
     }
+
+    public void addStr(String key, String value, TimeUnit unit, int time) {
+        jedis.set(key, value);
+        expire(key, unit, time);
+    }
     //新增 list
     public void addList(String key,String... values){
         jedis.lpush(key,values);

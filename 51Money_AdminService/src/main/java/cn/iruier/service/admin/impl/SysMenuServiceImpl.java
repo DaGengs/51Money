@@ -3,6 +3,7 @@ package cn.iruier.service.admin.impl;
 import cn.iruier.core.util.ExecuteUtil;
 import cn.iruier.core.util.PageUtil;
 import cn.iruier.core.util.StringUtils;
+import cn.iruier.core.vo.MenuTree;
 import cn.iruier.core.vo.PageVo;
 import cn.iruier.core.vo.ResultVo;
 import cn.iruier.entity.admin.SysMenu;
@@ -101,5 +102,20 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public ResultVo queryTree() {
         return new ResultVo(0, "ok", sysMenuMapper.queryAll());
+    }
+
+    @Override
+    public ResultVo getMenuTree() {
+        List<MenuTree> menuTrees = sysMenuMapper.queryAllTopMenu();
+        for (int i = 0; i < menuTrees.size(); i++) {
+            List<MenuTree> menuTrees1 = sysMenuMapper.queryAllNextMenu(menuTrees.get(i).getValue());
+            for (int j = 0; j < menuTrees1.size(); j++) {
+                menuTrees1.get(j).setCheck(false);
+                menuTrees1.get(j).setList(sysMenuMapper.queryAllPerms(menuTrees1.get(j).getValue()));
+            }
+            menuTrees.get(i).setCheck(false);
+            menuTrees.get(i).setList(menuTrees1);
+        }
+        return new ResultVo(0,"获取成功",menuTrees);
     }
 }

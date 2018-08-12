@@ -59,58 +59,6 @@ layui.use(['form', 'table'], function(){
     });
 
     var active = {
-        addJob: function () {
-            //示范一个公告层
-            layer.open({
-                type: 1
-                ,
-                title: false //不显示标题栏
-                ,
-                closeBtn: 2
-                ,
-                area: '500px;'
-                ,
-                shade: 0.8
-                ,
-                id: 'LAY_layuipro' //设定一个id，防止重复弹出
-                ,
-                btn: ['提交','关闭']
-                ,
-                btnAlign: 'c'
-                ,
-                moveType: 1 //拖拽模式，0或者1
-                ,
-                content: $("#addModel")
-                ,
-                yes: function (index, layero) {
-                    $.ajax({
-                        url: "/schedule/job/save.do",
-                        type: "post",
-                        // contentType : "application/json",
-                        data: $("#formData").serialize(),
-                        success: function (data) {
-                            if (data.code == 0) {
-                                layer.msg(data.msg);
-                            } else {
-                                layer.msg(data.msg);
-                            }
-                        }
-                    });
-                },
-                btn2: function(){
-                    location.reload();
-                }
-            });
-        }
-    }
-
-    $('#add').on('click', function(){
-        var othis = $(this), method = othis.data('method');
-        active[method] ? active[method].call(this, othis) : '';
-    });
-
-
-    var active = {
         startBatch: function(){
             var checkStatus = table.checkStatus('tbdata')
                 ,data = checkStatus.data;
@@ -171,6 +119,49 @@ layui.use(['form', 'table'], function(){
                 changeJob('delete', job_ids);
             });
         },
+        addJob: function () {
+            //示范一个公告层
+            layer.open({
+                type: 1
+                ,
+                title: false //不显示标题栏
+                ,
+                closeBtn: 2
+                ,
+                area: '500px;'
+                ,
+                shade: 0.8
+                ,
+                id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                ,
+                btn: ['提交','关闭']
+                ,
+                btnAlign: 'c'
+                ,
+                moveType: 1 //拖拽模式，0或者1
+                ,
+                content: $("#addModel")
+                ,
+                yes: function (index, layero) {
+                    $.ajax({
+                        url: "/schedule/job/save.do",
+                        type: "post",
+                        // contentType : "application/json",
+                        data: $("#formData").serialize(),
+                        success: function (data) {
+                            if (data.code == 0) {
+                                layer.msg(data.msg);
+                            } else {
+                                layer.msg(data.msg);
+                            }
+                        }
+                    });
+                },
+                btn2: function(){
+                    location.reload();
+                }
+            });
+        }
     };
 
     $('.demoTable .layui-btn').on('click', function(){

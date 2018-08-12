@@ -11,11 +11,12 @@
     <link href="css/common.css" rel="stylesheet">
     <link rel="stylesheet" href="css/user.css"/>
     <script type="text/javascript" src="script/jquery.min.js"></script>
+    <script type="text/javascript" src="script/vue.js"></script>
     <script type="text/javascript" src="script/common.js"></script>
     <script src="script/jquery-validation-1.14.0/jquery.validate.js"></script>
     <script src="script/jquery-validation-1.14.0/localization/messages_zh.js"></script>
     <script src="script/jquery.form.js"></script>
-
+    <script src="script/borrow.js"></script>
     <style type="text/css">
         .el-borrow-form{
             position: relative;
@@ -46,7 +47,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title">
                     信用借款
-                    <span class="text-info">可借金额：</span><span class="text-danger">8000</span>
+                    <span class="text-info">可借金额：</span><span class="text-danger" id="carditMoney">{{carditMoney}}</span>
                     <label class="label label-primary">信用标</label>
                 </h3>
             </div>
@@ -177,93 +178,5 @@
     </div>
 </div>
 <script src="script/foot.js"></script>
-
-<script type="text/javascript">
-    $(function(){
-
-        $.ajax({
-            url: "http://localhost:81/loan/getLoan.do",
-            data: {"account_id": 0},
-            success: function (data) {
-                console.log(data);
-                if (data != null) {
-                    location.href = "borrow_apply_result.html";
-                }
-            }
-        });
-
-        $("#borrowForm").validate({
-            rules : {
-                bidRequestAmount:{
-                    required:true,
-                    number:true,
-                    min:100,
-                    max:8000
-                },
-                currentRate:{
-                    required:true,
-                    number:true,
-                    min:5,
-                    max:20
-                },
-                minBidAmount:{
-                    required:true,
-                    number:true,
-                    min:2000
-                },
-                title:"required"
-            },
-            messages: {
-                bidRequestAmount:{
-                    required:"请填写借款金额",
-                    number:"借款金额为数字",
-                    min:"借款金额最小为{0}",
-                    max:"借款金额最大为{0}"
-                },
-                currentRate:{
-                    required:"请填写借款利息",
-                    number:"借款利息为数字",
-                    min:"最低借款利息为{0}%",
-                    max:"最大借款利息不能超过{0}%"
-                },
-                minBidAmount:{
-                    required:"请填写最小投标金额",
-                    number:"最小投标金额为数字",
-                    min:"最小投标金额必须大于{0}"
-                },
-                title:"必须填写借款原因"
-            },
-            //错误提示信息加载的位置
-            errorPlacement:function(label, element){
-                label.appendTo(element.closest(".form-group")).addClass('form-control-static');
-            },
-            //自定义错误样式
-            errorClass:"text-danger col-sm-3",
-            //未通过验证,进行高亮处理或其他处理；
-            highlight:function(input){
-                $(input).closest(".form-group").addClass("has-error");
-            },
-            //通过验证,清除高亮效果或其他处理；
-            unhighlight:function(input){
-                $(input).closest(".form-group").removeClass("has-error");
-            }
-        });
-
-        $("#commit").click(function () {
-            $.ajax({
-                url: "http://localhost:81/loan/save.do",
-                type: "post",
-                data: $("#borrowForm").serialize(),
-                success: function (data) {
-                    if (data.code == 0) {
-                        location.href = "borrow_apply_result.html";
-                    } else {
-                        alert(data.msg);
-                    }
-                }
-            })
-        })
-    });
-</script>
 </body>
 </html>

@@ -31,4 +31,16 @@
     <select id="queryByAID" resultType="Loan">
         select * from t_loan where account_id = #{account_id}
     </select>
+
+    <select id="queryStatus" resultType="cn.iruier.core.vo.StatusVo">
+        SELECT u.user_id,u.status infoStatus, r.status riskStatus, AVG(r.score) score, a.carditMoney ,a.id account_id FROM t_userinfo u LEFT JOIN t_risk r ON u.user_id = r.user_id LEFT JOIN t_account a ON u.user_id = a.user_id WHERE u.user_id = #{user_id}
+    </select>
+
+    <select id="queryList" resultType="Loan">
+        select * from t_loan where status = 1
+    </select>
+
+    <select id="queryDetail" resultType="cn.iruier.core.vo.LoanVo">
+        SELECT l.*,a.totalMoney,li.* FROM t_loan l LEFT JOIN t_account a ON l.`account_id` = a.`id` LEFT JOIN (SELECT SUM(money) completeMoney,COUNT(*) investPersion,loan_id FROM t_invest GROUP BY loan_id) li ON li.loan_id=l.id WHERE l.id = #{id}
+    </select>
 </mapper>

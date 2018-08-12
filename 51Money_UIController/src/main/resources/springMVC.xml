@@ -13,9 +13,29 @@
 	<context:component-scan
 		base-package="cn.iruier.uicontroller"></context:component-scan>
 
+    <bean id="dateMapper" class="cn.iruier.converter.DateMapper"></bean>
+
 	<!-- 放行静态资源 -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:message-converters>
+            <bean  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="dateMapper"></property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
 	<mvc:default-servlet-handler />
+
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!--设置转换器 -->
+        <property name="converters">
+            <list>
+                <!--自定义转换器 -->
+                <bean class="cn.iruier.converter.DateConverter"></bean>
+            </list>
+        </property>
+    </bean>
 
     <!-- 文件上传解析器 -->
     <bean id="multipartResolver"

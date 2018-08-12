@@ -330,7 +330,7 @@ ED.calculator = function(obj, default_apr, tender_id, account) {
 		quickClose: true
 	});
 	d.show(obj);
-	if($(".invest-table").length > 0){
+	if($(".loan-table").length > 0){
 		$(obj).closest(".item").css("background","#f5f9fd").siblings().removeAttr("style");
         //$('div:empty').on('click',function(){
         //    $(".item").removeAttr("style");
@@ -541,7 +541,7 @@ $(function() {
 			zIndex: ""
 		})
 	});
-	$(".invest-table .item").hover(function() {
+	$(".loan-table .item").hover(function() {
 		$(this).addClass("odd")},function() {
 		$(this).removeClass("odd")
 	});
@@ -549,7 +549,7 @@ $(function() {
 		$(this).addClass("odd")},function() {
 		$(this).removeClass("odd")
 	});
-	$(".invest-list .invest-table .item").hover(function() {
+	$(".loan-list .loan-table .item").hover(function() {
 		$(this).addClass("hover")
 	},function() {
 		$(this).removeClass("hover")

@@ -25,7 +25,8 @@ public class QuartzJob extends QuartzJobBean {
 		String beanName = scheduleJob.getBean_name();
 		String methodName = scheduleJob.getMethod_name();
 		String params = scheduleJob.getParams();
-		Object target = SpringContextUtils.getBean(beanName);
+        System.err.println(beanName);
+        Object target = SpringContextUtils.getBean(beanName);
 		
 //		ScheduleJobLog log = new ScheduleJobLog();
 //		log.setBeanName(beanName);

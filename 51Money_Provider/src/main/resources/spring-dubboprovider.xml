@@ -14,4 +14,6 @@
     <dubbo:service interface="cn.iruier.service.loan.LoanService" version="1.0" ref="loanProvider" timeout="2000"></dubbo:service>
     <dubbo:service interface="cn.iruier.service.loan.LoanLogService" version="1.0" ref="loanLogProvider" timeout="2000"></dubbo:service>
     <dubbo:service interface="cn.iruier.service.activemq.ActiveMQService" version="1.0" ref="activeMQProvider" timeout="2000"></dubbo:service>
+    <dubbo:service interface="cn.iruier.service.invest.InvestService" version="1.0" ref="investProvider" timeout="2000"></dubbo:service>
+    <dubbo:service interface="cn.iruier.service.invest.PayService" version="1.0" ref="payProvider" timeout="2000"></dubbo:service>
 </beans>

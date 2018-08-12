@@ -22,6 +22,7 @@
         <module>51Money_SSOController</module>
         <module>51Money_Spider</module>
         <module>51Money_MsgController</module>
+        <module>51Money_ElasticSearch</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -54,10 +55,13 @@
         <webmagic-extension.version>0.7.3</webmagic-extension.version>
         <freemarker.version>2.3.28</freemarker.version>
         <quartz.version>2.3.0</quartz.version>
-        <!--<spring-context.version>5.0.7.RELEASE</spring-context.version>-->
         <activemq.version>5.15.4</activemq.version>
         <spring-jms.version>5.0.7.RELEASE</spring-jms.version>
         <jms-api.version>2.0.1</jms-api.version>
+        <elasticsearch.version>3.0.5.RELEASE</elasticsearch.version>
+        <transport.version>5.6.10</transport.version>
+        <zxing-core.version>3.3.3</zxing-core.version>
+        <zxing-javaee.version>3.3.3</zxing-javaee.version>
     </properties>
 
     <!--限定版本号-->
@@ -255,6 +259,31 @@
                 <artifactId>javax.jms-api</artifactId>
                 <version>${jms-api.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>${transport.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${zxing-javaee.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

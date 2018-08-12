@@ -32,4 +32,9 @@ public class AccountProvider implements AccountService {
     public ResultVo update(Account account) {
         return ExecuteUtil.getResult(accountMapper.update(account), "账户更新");
     }
+
+    @Override
+    public Account queryByAid(int account_id) {
+        return accountMapper.quertByAid(account_id);
+    }
 }

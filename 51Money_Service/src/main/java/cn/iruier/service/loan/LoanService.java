@@ -1,8 +1,12 @@
 package cn.iruier.service.loan;
 
+import cn.iruier.core.vo.LoanVo;
 import cn.iruier.core.vo.PageVo;
 import cn.iruier.core.vo.ResultVo;
+import cn.iruier.core.vo.StatusVo;
 import cn.iruier.entity.loan.Loan;
+
+import java.util.List;
 
 /**
  * @Author: iruier
@@ -12,11 +16,13 @@ public interface LoanService {
 
     ResultVo insert(Loan loan);
 
-    PageVo<Loan> queryAll(int page, int size);
-
 //    int update(Loan loan);
 
-    ResultVo updateStatus(int id, int status);
-
     Loan queryByAID(int account_id);
+
+    StatusVo queryStatus(int user_id);
+
+    List<Loan> queryList();
+
+    LoanVo queryDetail(int id);
 }

@@ -30,4 +30,12 @@
         <property name="destination" ref="activeMQQueue"></property>
         <property name="messageListener" ref="loanMsgListener"></property>
     </bean>
+
+    <bean id="investListener" class="cn.iruier.msglistener.invest.InvestMsgListener"></bean>
+
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="destination" ref="activeMQQueue"></property>
+        <property name="messageListener" ref="investListener"></property>
+    </bean>
 </beans>

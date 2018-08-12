@@ -82,4 +82,9 @@ public class SysMenuController {
     public ResultVo getTree() {
         return sysMenuService.queryTree();
     }
+
+    @GetMapping("/getMenuTree.do")
+    public ResultVo getMenuTree() {
+        return sysMenuService.getMenuTree();
+    }
 }

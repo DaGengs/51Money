@@ -24,8 +24,8 @@ public class UserInfoController {
     private OSSUtil ossUtil;
 
     @PostMapping("commitInfo.do")
-    public ResultVo saveInfo(@RequestBody UserInfo userInfo) {
-        return service.save(userInfo);
+    public ResultVo updateInfo(@RequestBody UserInfo userInfo) {
+        return service.updateInfo(userInfo);
     }
 
     @PostMapping("imgUpload.do")

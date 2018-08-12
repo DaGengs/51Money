@@ -1,5 +1,6 @@
 package cn.iruier.mapper.admin;
 
+import cn.iruier.core.vo.MenuTree;
 import cn.iruier.entity.admin.SysMenu;
 import org.apache.ibatis.annotations.Param;
 
@@ -58,4 +59,11 @@ public interface SysMenuMapper {
     List<SysMenu> queryUserTop(List<Integer> menu_idList);
 
     List<SysMenu> queryUserMenuByParentId(@Param("menu_id") int menu_id,@Param("menu_ids") List<Integer> menu_ids);
+
+    /**
+     * tree
+     * */
+    List<MenuTree> queryAllTopMenu();
+    List<MenuTree> queryAllNextMenu(int parent_id);
+    List<MenuTree> queryAllPerms(int parent_id);
 }

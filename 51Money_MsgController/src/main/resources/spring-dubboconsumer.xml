@@ -9,4 +9,5 @@
 
     <dubbo:reference interface="cn.iruier.service.activemq.ActiveMQService" id="activeMQProvider" version="1.0"></dubbo:reference>
     <dubbo:reference interface="cn.iruier.service.loan.LoanLogService" id="loanLogProvider" version="1.0"></dubbo:reference>
+    <dubbo:reference interface="cn.iruier.service.user.AccountService" id="accountProvider" version="1.0"></dubbo:reference>
 </beans>

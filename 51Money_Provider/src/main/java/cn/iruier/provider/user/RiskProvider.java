@@ -43,7 +43,6 @@ public class RiskProvider implements RiskService {
                     risk.setScore(0);
                     break;
         }
-        risk.setUser_id(1);
         return ExecuteUtil.getResult(riskMapper.insert(risk), "风控资料提交");
     }
 

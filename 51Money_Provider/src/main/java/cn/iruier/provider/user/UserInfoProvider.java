@@ -15,8 +15,8 @@ public class UserInfoProvider implements UserInfoService {
     private UserInfoMapper mapper;
 
     @Override
-    public ResultVo save(UserInfo userInfo) {
-        return ExecuteUtil.getResult(mapper.insert(userInfo), "资料提交");
+    public ResultVo updateInfo(UserInfo userInfo) {
+        return ExecuteUtil.getResult(mapper.updateInfo(userInfo), "资料提交");
     }
 
     @Override

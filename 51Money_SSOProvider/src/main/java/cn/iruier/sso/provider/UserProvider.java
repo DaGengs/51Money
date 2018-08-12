@@ -54,9 +54,9 @@ public class UserProvider implements UserService {
     public ResultVo checkLogin(String token) {
         if (jedisUtil.isKey("userToken:" + token)) {
             jedisUtil.expire("userToken:"+token, TimeUnit.MINUTES, 30);
-            return ResultVo.setSuccess("有效");
+            return new ResultVo(0, "有效", JSON.parseObject(jedisUtil.getStr("userToken:"+token), User.class));
         } else {
-            return ResultVo.setError("失效");
+            return ResultVo.setError("已失效");
         }
     }
 

@@ -16,7 +16,7 @@ public class SysUser {
     private int status;
     private int create_user_id;
     private Date create_time;
-    private List<Long> roleIdList;
+    private List<SysRole> roleIdList;
 
     public int getUser_id() {
         return user_id;
@@ -82,11 +82,11 @@ public class SysUser {
         this.create_time = create_time;
     }
 
-    public List<Long> getRoleIdList() {
+    public List<SysRole> getRoleIdList() {
         return roleIdList;
     }
 
-    public void setRoleIdList(List<Long> roleIdList) {
+    public void setRoleIdList(List<SysRole> roleIdList) {
         this.roleIdList = roleIdList;
     }
 }

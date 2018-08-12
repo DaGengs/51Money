@@ -145,7 +145,7 @@ $("#regchk").click(function(){
 	}
 })
 /*投资协议*/
-$("#invest-chk").click(function(){
+$("#loan-chk").click(function(){
 	var $checkname=$(this).children("b").hasClass("selected");
 	if($checkname){
 		$(this).children("b").removeClass("selected");
@@ -198,16 +198,16 @@ $('.pay-txt,.pay-money-txt,.deposite-txt').blur(function(){
 	
 	
 /*债权详细页*/
-$('.invest-txt').focus(function(){
+$('.loan-txt').focus(function(){
 	var txt_value = $(this).val();
 	if(txt_value == this.defaultValue){
 		$(this).val('');
 		}
 	})	
-$('.invest-txt').keydown(function(){
+$('.loan-txt').keydown(function(){
 	$(this).css("color","#4B4948");
 	})
-$('.invest-txt').blur(function(){
+$('.loan-txt').blur(function(){
 	var txt_value = $(this).val();
 	if(txt_value == ''){
 		$(this).val(this.defaultValue);
@@ -655,30 +655,4 @@ function countDown(showid,count,url){
 		callback:function(){window.location.href=url;}
 	}).begin();
 }
-$(function () {
-    $.ajax({
-        url: "http://localhost:82/getUser.do",
-        xhrFields: {withCredentials: true},
-        success: function (user) {
-            $.ajax({
-                url: "http://localhost:81/getUserInfo.do",
-                data: {"user_id": user.id},
-                xhrFields: {withCredentials: true},
-                success: function (userInfo) {
-                    new Vue({
-                        el: '#userInfo',
-                        data: {
-                            realName: userInfo.realName,
-                            gender: userInfo.gender,
-                            idNumber: userInfo.idNumber,
-                            birthday: userInfo.birthday,
-                            username: user.username,
-                            phone: user.phone,
-                            status: userInfo.status
-                        }
-                    });
-                }
-            });
-        }
-    })
-});
+

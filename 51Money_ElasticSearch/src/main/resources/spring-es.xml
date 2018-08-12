@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--spring 的配置 约束文件用到哪个引入哪个 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/elasticsearch http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd">
+
+    <context:property-placeholder location="classpath:*-config.properties"/>
+
+    <elasticsearch:transport-client id="client" cluster-name="es01" cluster-nodes="47.104.243.145:9300"></elasticsearch:transport-client>
+
+    <bean class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate" id="elasticsearchTemplate">
+        <constructor-arg name="client" ref="client"></constructor-arg>
+    </bean>
+
+    <context:component-scan base-package="cn.iruier.service.impl"></context:component-scan>
+
+    <elasticsearch:repositories base-package="cn.iruier.repository"></elasticsearch:repositories>
+
+
+</beans>

@@ -33,6 +33,7 @@ public class SysUserController {
             Subject subject = SecurityUtils.getSubject();
             password = EncrypUtil.md5Pass(password);
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            System.out.println(token);
             subject.login(token);
         }catch (UnknownAccountException e) {
             return ResultVo.setError(e.getMessage());

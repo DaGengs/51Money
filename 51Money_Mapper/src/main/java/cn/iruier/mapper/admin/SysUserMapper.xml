@@ -19,8 +19,8 @@
         select <include refid="base"/> from sys_user where user_id = #{user_id}
     </select>
 
-    <select id="queryByPage" resultType="SysUser">
-        select <include refid="base"/> from sys_user limit #{index}, #{size}
+    <select id="queryByPage" resultMap="ur">
+        SELECT su.*,ur.`role_id` FROM sys_user su LEFT JOIN sys_user_role ur ON su.user_id = ur.`user_id` limit #{index}, #{size}
     </select>
 
     <update id="deleteBatch">
@@ -33,4 +33,18 @@
     <select id="queryCount" resultType="Integer">
         select COUNT(*) from sys_user
     </select>
+
+    <resultMap id="ur" type="SysUser">
+        <id property="user_id" column="user_id"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="email" column="email"></result>
+        <result property="mobile" column="mobile"></result>
+        <result property="status" column="status"></result>
+        <result property="create_user_id" column="create_user_id"></result>
+        <result property="create_time" column="create_time"></result>
+        <collection property="roleIdList" ofType="SysRole">
+            <id property="role_id" column="role_id"></id>
+        </collection>
+    </resultMap>
 </mapper>
