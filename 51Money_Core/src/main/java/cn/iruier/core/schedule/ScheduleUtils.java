@@ -34,8 +34,8 @@ public class ScheduleUtils {
 
 			//放入参数，运行时的JOB可以获取
 			job.getJobDataMap().put("JOB_PARAM_KEY", scheduleJob);
-			
-			scheduler.scheduleJob(job, trigger);
+
+            scheduler.scheduleJob(job, trigger);
 		} catch (SchedulerException e) {
 		    e.printStackTrace();
 //

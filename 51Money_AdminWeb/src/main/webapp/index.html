@@ -21,7 +21,6 @@
                 $.ajax({
                     url: "/sys/menu/getMenu.do",
                     success: function (data) {
-                        console.log(data);
                         var str = "";
                         for (var i = 0; i < data.length; i++) {
                             str += "<li>";
@@ -55,7 +54,7 @@
         </div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
-              <a href="javascript:;"><span id="user_no"></span></a>
+              <a href="javascript:;">欢迎您：<span id="username"></span></a>
             <dl class="layui-nav-child">
               <dd><a href="javascript:;" data-method="editPwd" id="a2">修改密码</a></dd>
             </dl>
@@ -98,9 +97,9 @@
             <div class="layui-row" style="margin-left: 40px">
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">工号</label>
+                        <label class="layui-form-label">用户名</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="user_no2" class="layui-input" readonly>
+                            <input type="text" id="username2" class="layui-input" readonly>
                         </div>
                     </div>
                 </div><div class="layui-form-item">

@@ -6,8 +6,9 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface UserInfoMapper {
-    @Insert("insert into t_userinfo (user_id, realName, idNumber, gender, birthday, address, idCardImg_pre, idCardImg_aft, status) values(#{user_id}, #{realName}, #{idNumber}, #{gender}, #{birthday}, #{address}, #{idCardImg_pre}, #{idCardImg_aft}, 1)")
-    int insert(UserInfo userInfo);
+
+    @Update("update t_userinfo set realName = #{realName}, idNumber = #{idNumber}, gender = #{gender}, birthday = #{birthday}, address = #{address}, idCardImg_pre = #{idCardImg_pre}, idCardImg_aft = #{idCardImg_aft}, status = 1 where user_id = #{user_id}")
+    int updateInfo(UserInfo userInfo);
 
     @Select("select realName, idNumber, gender, birthday, status from t_userinfo where user_id = #{user_id}")
     @ResultType(UserInfo.class)

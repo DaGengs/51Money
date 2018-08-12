@@ -12,4 +12,6 @@
     <dubbo:reference interface="cn.iruier.service.user.AccountService" id="accountProvider" version="1.0"></dubbo:reference>
     <dubbo:reference interface="cn.iruier.service.loan.LoanService" id="loanProvider" version="1.0"></dubbo:reference>
     <dubbo:reference interface="cn.iruier.service.activemq.ActiveMQService" id="activeMQProvider" version="1.0"></dubbo:reference>
+    <dubbo:reference interface="cn.iruier.service.invest.InvestService" id="investProvider" version="1.0"></dubbo:reference>
+    <dubbo:reference interface="cn.iruier.service.invest.PayService" id="payProvider" version="1.0"></dubbo:reference>
 </beans>

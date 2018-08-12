@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+
 /**
  * @Author: iruier
  * @Date: 2018/8/4 19:58
@@ -20,9 +22,16 @@ public class ActiveMQProvider implements ActiveMQService {
     private ActiveMQQueue activeMQQueue;
 
     @Override
-    public void senMsg(String msg) {
+    public void sendMsg(String msg) {
         jmsTemplate.send(activeMQQueue, (session) -> {
             return session.createTextMessage(msg);
+        });
+    }
+
+    @Override
+    public void sendObject(Serializable serializable) {
+        jmsTemplate.send(activeMQQueue, (session) -> {
+            return session.createObjectMessage(serializable);
         });
     }
 }

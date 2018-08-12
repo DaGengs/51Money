@@ -15,37 +15,11 @@
 </head>
 <body>
 <script type="text/html" id="toolbar">
-    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="addMenu">分配权限</a>
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit"><i class="layui-icon">&#xe642;</i>编辑</a>
     <!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon">&#xe640;</i>删除</a>
 </script>
-<script type="text/html" id="menu_nameTpl">
-    {{# if(d.menus == ""){ }}
-        暂无
-    {{# } else { }}
-        {{# for(var i = 0; i < d.menus.length; i++){ }}
-            {{ d.menus[i].menu_name }}
-        {{# } }}
-    {{# } }}
-</script>
-<script type="text/html" id="menu_urlTpl">
-    {{# if(d.menus == ""){ }}
-        暂无
-    {{# } else { }}
-        {{# for(var i = 0; i < d.menus.length; i++){ }}
-            {{ d.menus[i].menu_url }}
-        {{# } }}
-    {{# } }}
-</script>
-<script type="text/html" id="menu_iconTpl">
-    {{# if(d.menus == ""){ }}
-        暂无
-    {{# } else { }}
-        {{# for(var i = 0; i < d.menus.length; i++){ }}
-            <i class="layui-icon">{{ d.menus[i].menu_icon }}</i>
-        {{# } }}
-    {{# } }}
-</script>
+
 <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
@@ -55,14 +29,26 @@
     <a style="float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="iconfont" style="line-height:30px">&#xe6aa;</i></a>
 </div>
-<div style="display: none;" id="addModel">
-    <form class="layui-form">
+<div style="display: none;" id="menuModel">
+    <form class="layui-form" id="formData">
         <div style="margin-top: 30px;">
             <div class="layui-form-item">
                 <label class="layui-form-label">角色名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="role_name" required lay-verify="required" placeholder="请输入角色名称" autocomplete="off"
+                    <input type="text" id="role_name" name="role_name" required lay-verify="required" placeholder="请输入角色名称" autocomplete="off"
                            class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色说明</label>
+                <div class="layui-input-inline" style="width: 300px">
+                    <input type="text" id="remark" name="remark" required lay-verify="required" placeholder="请输入角色说明" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色权限</label>
+                <div class="layui-input-inline" id="menuList" style="width: 300px">
                 </div>
             </div>
         </div>
@@ -73,22 +59,7 @@
         <a class="layui-btn layui-btn-sm layui-btn-normal" href="javascript:;" data-method="addRole" id="add">
             <i class="layui-icon">&#xe654;</i>新增
         </a>
-        <!--  <button class="layui-btn layui-btn-primary">
-              <i class="layui-icon">&#xe642;</i>修改
-          </button>
-          <button class="layui-btn layui-btn-primary">
-              <i class="layui-icon">&#xe640;</i>删除
-          </button>-->
     </div>
-</div>
-<div style="display: none;" id="menuModel">
-    <form class="layui-form">
-        <div class="layui-form-item" style="margin-top: 20px">
-            <label class="layui-form-label">选择权限：</label>
-            <div class="layui-input-block" id="menuList">
-            </div>
-        </div>
-    </form>
 </div>
     <table id="tbdata" lay-filter="tbop"></table>
 </body>

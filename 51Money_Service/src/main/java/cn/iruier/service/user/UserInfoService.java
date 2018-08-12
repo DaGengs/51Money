@@ -4,7 +4,7 @@ import cn.iruier.core.vo.ResultVo;
 import cn.iruier.entity.user.UserInfo;
 
 public interface UserInfoService {
-    ResultVo save(UserInfo userInfo);
+    ResultVo updateInfo(UserInfo userInfo);
 
     ResultVo checkStatus(int user_id);
 

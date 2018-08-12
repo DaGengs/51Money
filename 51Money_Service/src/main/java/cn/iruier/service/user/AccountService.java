@@ -14,4 +14,6 @@ public interface AccountService {
     Account queryByUid(int user_id);
 
     ResultVo update(Account account);
+
+    Account queryByAid(int account_id);
 }

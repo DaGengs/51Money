@@ -370,3 +370,15 @@ function loginout() {
         }
     })
 }
+//获取传递的参数信息
+function getData() {
+    var url=window.location.search;
+    index=url.indexOf("?");
+    if(index>-1){
+        var str = url.substr(index+1);
+        if(str.indexOf('=')){
+            return str.split('=')[1];
+        }
+    }
+    return null;
+}

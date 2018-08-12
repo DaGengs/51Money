@@ -19,6 +19,10 @@ public interface AccountMapper {
     @ResultType(Account.class)
     Account queryByUid(int user_id);
 
-    @Update("update t_account set totalMoney = #{totalMoney}, redPackage = #{redPackage}, forceMoney = #{forceMoney}, carditMoney = #{carditMoney} where user_id = #{user_id}")
+    @Update("update t_account set totalMoney = #{totalMoney}, redPackage = #{redPackage}, forceMoney = #{forceMoney}, carditMoney = #{carditMoney} where id = #{id}")
     int update(Account account);
+
+    @Select("select * from t_account where id = #{account_id} and status = 1")
+    @ResultType(Account.class)
+    Account quertByAid(int account_id);
 }

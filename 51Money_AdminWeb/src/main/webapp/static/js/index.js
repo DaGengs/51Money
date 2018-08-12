@@ -2,8 +2,8 @@ $(function () {
    $.ajax({
        url: "/sys/user/info.do",
        success: function (data) {
-           $("#user_no").html(data.user_no);
-           $("#user_no2").val(data.user_no);
+           $("#username").html(data.username);
+           $("#username2").val(data.username);
        }
    })
 });

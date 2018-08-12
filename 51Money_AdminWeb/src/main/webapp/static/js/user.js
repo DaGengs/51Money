@@ -16,10 +16,10 @@ layui.use(['form', 'table'], function(){
                     var r;
                     switch (obj.status) {
                         case 1:
-                            r = "<span class='layui-badge layui-bg-blue'>有效</span>";
+                            r = "<span class='layui-badge layui-bg-blue'>正常</span>";
                             break;
                         case 2:
-                            r = "<span class='layui-badge layui-bg-red'>无效</span>";
+                            r = "<span class='layui-badge layui-bg-red'>禁用</span>";
                             break;
                     }
                     return r;
@@ -32,8 +32,19 @@ layui.use(['form', 'table'], function(){
     table.on('tool(tbop)', function(obj){
         var layEvent = obj.event;
         var data = obj.data;
-        console.log(data);
-        if (layEvent == 'addRole') {
+        $("#username").val(data.username);
+        $("#password").val(data.password);
+        $("#email").val(data.email);
+        $("#mobile").val(data.mobile);
+        $("#username").val(data.username);
+        $("input[name='status'][value='"+data.status+"']").attr("checked",true);
+        for (var i = 0; i < data.roleIdList.length; i++) {
+            $(":checkbox[value='"+data.roleIdList[i].role_id+"']").prop("checked",true);
+        }
+        form.render("radio");
+        form.render("checkbox");
+
+        if (layEvent == 'edit') {
             layer.open({
                 type: 1
                 ,
@@ -53,7 +64,7 @@ layui.use(['form', 'table'], function(){
                 ,
                 moveType: 1 //拖拽模式，0或者1
                 ,
-                content: $("#roleModel")
+                content: $("#userModel")
                 ,
                 yes: function (index, layero) {
                     var role_id=$("input[name='role']");
@@ -102,7 +113,7 @@ layui.use(['form', 'table'], function(){
 
     var active = {
         addUser: function () {
-            //示范一个公告层
+            $("#formData")[0].reset();
             layer.open({
                 type: 1
                 ,
@@ -110,7 +121,7 @@ layui.use(['form', 'table'], function(){
                 ,
                 closeBtn: 2
                 ,
-                area: '360px;'
+                area: '700px;'
                 ,
                 shade: 0.8
                 ,
@@ -122,7 +133,7 @@ layui.use(['form', 'table'], function(){
                 ,
                 moveType: 1 //拖拽模式，0或者1
                 ,
-                content: $("#addModel")
+                content: $("#userModel")
                 ,
                 yes: function (index, layero) {
                     var user = {
@@ -155,4 +166,18 @@ layui.use(['form', 'table'], function(){
         var othis = $(this), method = othis.data('method');
         active[method] ? active[method].call(this, othis) : '';
     });
+
+    initData();
+
+    function initData() {
+        $.ajax({
+            url: "/sys/role/selectAll.do",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#roleList").append("<input type='checkbox' name='role' value='"+data[i].role_id+"' title='"+data[i].role_name+"' lay-skin='primary'>");
+                    form.render("checkbox");
+                }
+            }
+        });
+    };
 });

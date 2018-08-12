@@ -4,7 +4,6 @@ layui.config({
     treetable: 'treetable-lay/treetable'
 }).use(['treetable'], function () {
     var treetable = layui.treetable;
-
 });
 layui.use(['form', 'table', 'tree', 'treetable'], function(){
     var form = layui.form, table = layui.table, treetable = layui.treetable;
@@ -14,17 +13,17 @@ layui.use(['form', 'table', 'tree', 'treetable'], function(){
         treeSpid: 0,             // 最上级的父级id
         treeIdName: 'menu_id',       // id字段的名称
         treePidName: 'parent_id',     // pid字段的名称
-        treeDefaultClose: true,   // 是否默认折叠
+        treeDefaultClose: false,   // 是否默认折叠
         treeLinkage: false,        // 父级展开时是否自动展开所有子级
         elem: '#tbdata',
         url: '/sys/menu/getTree.do',
         cols: [[
-            {type: 'numbers'},
+            {type: 'numbers', title: '序号'},
             {field: 'menu_id', align:'center',title: '菜单ID'},
             {field: 'name', width:'15%', title: '菜单名称'},
             {field: 'url', align:'center',title: '菜单路径',templet: function(d){return d.url == '' ? "无" : d.url}},
             {field: 'perms', align:'center',title: '权限',templet: function(d){return d.perms == '' ? "无" : d.perms}},
-            {field: 'type', align:'center',title: '类型',templet: function (obj) {
+            {field: 'type', align:'center', width:'5%',title: '类型',templet: function (obj) {
                     var r;
                     switch (obj.type) {
                         case 0:
@@ -40,9 +39,9 @@ layui.use(['form', 'table', 'tree', 'treetable'], function(){
                     return r;
                 }},
             {field: 'icon', align:'center',title: '菜单图标', templet: '<i class="layui-icon">{{ d.icon }}</i>'},
-            {field: 'order_num', align:'center',title: '排序规则'},
-            {field: 'parent_id', align:'center',title: '父级菜单ID'},
-            {fixed: 'right', width:150,title: '操作', align:'center', toolbar: '#toolbar'}
+            {field: 'order_num', align:'center', width:'8%',title: '排序规则'},
+            {field: 'parent_id', align:'center', width:'8%',title: '父级菜单ID'},
+            {fixed: 'right', width:200,title: '操作', align:'center', toolbar: '#toolbar'}
         ]]
     });
 
@@ -103,5 +102,7 @@ layui.use(['form', 'table', 'tree', 'treetable'], function(){
         var othis = $(this), method = othis.data('method');
         active[method] ? active[method].call(this, othis) : '';
     });
+
+
 
 });

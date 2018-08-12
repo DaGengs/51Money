@@ -34,7 +34,7 @@ layui.use(['form', 'table'], function(){
                     return r;
                 }}
             ,{field: 'imgUrl', align:'center',title: '资料照片', templet: function (obj) {
-                    return "<img src='"+obj.imgUrl+"' width='50px' height='50px' alt='未上传'/>"
+                    return "<img src='"+obj.imgUrl+"' style='cursor: pointer;' title='点击图片放大' onclick='big(this)' width='50px' height='50px' alt='未上传'/>"
                 }}
             ,{field: 'score', align:'center',title: '安全系数'}
             ,{field: 'status',width:'6%', align:'center',title: '审核状态',templet: function (obj) {
@@ -88,3 +88,12 @@ layui.use(['form', 'table'], function(){
         })
     }
 });
+
+function big(obj) {
+    layer.open({
+        type: 3,
+        shadeClose: true,
+        offset: ['300px', '600px'],
+        content: "<img src='"+obj.src+"' width='600px' height='400px'>"
+    });
+}

@@ -39,7 +39,7 @@
         </foreach>
     </delete>
 
-    <select id="queryAll">
+    <select id="queryAll" resultType="SysRole">
         select <include refid="base"/> from sys_role
     </select>
 

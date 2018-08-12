@@ -6,7 +6,7 @@
         job_id,bean_name,method_name,params,cron_expression,status,remark,create_time
     </sql>
 
-    <insert id="insert" parameterType="ScheduleJob" useGeneratedKeys="true" keyProperty="job_id" keyColumn="job_id">
+    <insert id="insert" parameterType="ScheduleJob">
         insert into t_schedulejob(bean_name, method_name, params, cron_expression, status, remark, create_time) values(#{bean_name},#{method_name},#{params},#{cron_expression},1,#{remark},now())
     </insert>
 

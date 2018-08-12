@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/user.css"/>
     <script type="text/javascript" src="script/jquery.min.js"></script>
     <script type="text/javascript" src="script/common.js"></script>
+    <script type="text/javascript" src="script/vue.js"></script>
+    <script type="text/javascript" src="script/borrow.js"></script>
     <style type="text/css">
         .my-list-group li {
             list-style: disc inside none;
@@ -33,64 +35,49 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">信用贷</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" id="statusData" style="height: 240px">
                         <p class="text-primary mb15">
-                            认证后可借金额 <i>¥ ${account.remainBorrowLimit}</i>
+                            认证后可借金额 <i>¥  15,0000.00</i>
                         </p>
                         <h4>申请条件</h4>
                         <ul class="my-list-group">
-                            <li>
-                                <c:if test="${!userInfo.isBasicInfo}">
-                                    <a href="/personal_basic">填写基本资料</a>
+                            <li v-if="sdata.infoStatus != 2">
+                                    <a href="/real_auth.html">填写基本资料</a>
                                     <span class="glyphicon glyphicon-remove" style="color:red;"></span>
-                                </c:if>
-                                <c:if test="${userInfo.isBasicInfo}">
-                                    填写基本资料
-                                    <span class="glyphicon glyphicon-ok" style="color:green;"></span>
-                                </c:if>
                             </li>
-                            <li>
-                                <c:if test="${!userInfo.isRealAuth}">
-                                    <a href="/real_auth">身份认证</a>
-                                    <span class="glyphicon glyphicon-remove" style="color:red;"></span>
-                                </c:if>
-                                <c:if test="${userInfo.isRealAuth}">
-                                    身份认证<span class="glyphicon glyphicon-ok" style="color:green;"></span>
-                                </c:if>
+                            <li v-if="sdata.infoStatus == 2">
+                                填写基本资料
+                                <span class="glyphicon glyphicon-ok" style="color:green;"></span>
                             </li>
-                            <li>
-                                <c:if test="${userInfo.authScore lt creditBorrowScore}">
-                                    <a href="/user_file">材料认证分数达到${creditBorrowScore}分</a>
-                                    <span class="glyphicon glyphicon-remove" style="color:red;"></span>
-                                </c:if>
-                                <c:if test="${userInfo.authScore ge creditBorrowScore}">
-                                    材料认证分数达到${creditBorrowScore}分<span class="glyphicon glyphicon-ok" style="color:green;">
-                                    </span>
-                                </c:if>
+                            <li v-if="sdata.infoStatus != 2">
+                                <a href="/real_auth.html">身份认证</a>
+                                <span class="glyphicon glyphicon-remove" style="color:red;"></span>
+                            </li>
+                            <li v-else="sdata.infoStatus == 2">
+                                身份认证<span class="glyphicon glyphicon-ok" style="color:green;"></span>
+                            </li>
+                            <li v-if="sdata.score < 70">
+                                <a href="/user_file.html">材料认证分数达到70分</a>
+                                <span class="glyphicon glyphicon-remove" style="color:red;"></span>
+                            </li>
+                            <li v-else="sdata.score >= 70">
+                                材料认证分数达到{{sdata.score}}分<span class="glyphicon glyphicon-ok" style="color:green;">
+                                </span>
                             </li>
                             <li>视频认证
-                                <c:if test="${!userInfo.isVedioAuth}">
-                                    <span class="glyphicon glyphicon-remove" style="color:red;"></span>
-                                </c:if>
-                                <c:if test="${userInfo.isVedioAuth}">
-                                    <span class="glyphicon glyphicon-ok" style="color:green;"></span>
-                                </c:if>
+                                <span class="glyphicon glyphicon-ok" style="color:green;"></span>
                             </li>
-                            <div class="text-center">
-                                <c:choose>
-                                    <c:when test="${ userInfo.isBasicInfo && userInfo.isRealAuth && (userInfo.authScore >= creditBorrowScore) && userInfo.isVedioAuth}">
-                                        <a href="borrow_apply.html" class="btn btn-primary">
-                                            申请贷款
-                                        </a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="#" class="btn btn-default">
-                                            申请贷款
-                                        </a>
-                                    </c:otherwise>
-                                </c:choose>
+                            <div class="text-center" style="margin-top: 15px" v-if="sdata.riskStatus == 1">
+                                <a href="borrow_apply.html" class="btn btn-primary">
+                                    申请贷款
+                                </a>
                             </div>
 
+                            <div class="text-center" style="margin-top: 15px" v-if="sdata.riskStatus == 0">
+                                <a disabled class="btn btn-primary">
+                                    请先认证信息
+                                </a>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -150,20 +137,5 @@
 </div>
 
 <script src="script/foot.js"></script>
-
-<script>
-    $(function () {
-        $.ajax({
-            url: "http://localhost:81/loan/getLoan.do",
-            data: {"account_id": 0},
-            success: function (data) {
-                console.log(data);
-                if (data != null) {
-                    location.href = "borrow_apply_result.html";
-                }
-            }
-        })
-    })
-</script>
 </body>
 </html>

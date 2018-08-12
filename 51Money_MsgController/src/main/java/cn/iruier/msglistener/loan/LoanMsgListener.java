@@ -3,6 +3,7 @@ package cn.iruier.msglistener.loan;
 import cn.iruier.core.vo.ResultVo;
 import cn.iruier.entity.loan.Loan;
 import cn.iruier.entity.loan.LoanLog;
+import cn.iruier.entity.user.Account;
 import cn.iruier.service.loan.LoanLogService;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class LoanMsgListener implements MessageListener {
 
     @Autowired
     private LoanLogService service;
+    /*
+    @Autowired
+    private Account account;*/
 
     @Override
     public void onMessage(Message message) {
@@ -33,7 +37,7 @@ public class LoanMsgListener implements MessageListener {
                 case 10001:
                     LoanLog loanLog = new LoanLog();
                     loanLog.setType(1);
-                    loanLog.setSysUser_id(0);
+                    loanLog.setSysUser_id(1);
                     loanLog.setMsg("借款日志：" + textMessage.getText());
                     service.insert(loanLog);
                     break;

@@ -78,4 +78,16 @@
         </foreach>
         order by order_num asc
     </select>
+
+    <select id="queryAllTopMenu" resultType="cn.iruier.core.vo.MenuTree">
+        select name, menu_id value from sys_menu where parent_id is null order by order_num desc
+    </select>
+
+    <select id="queryAllNextMenu" resultType="cn.iruier.core.vo.MenuTree">
+        select name, menu_id value from sys_menu where type != 2 and parent_id = #{parent_id} order by order_num asc
+    </select>
+
+    <select id="queryAllPerms" resultType="cn.iruier.core.vo.MenuTree">
+        SELECT name, menu_id VALUE FROM sys_menu WHERE TYPE != 1 AND parent_id = #{parent_id} ORDER BY order_num ASC
+    </select>
 </mapper>

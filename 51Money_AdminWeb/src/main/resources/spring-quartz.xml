@@ -13,7 +13,7 @@
 		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
 		<property name="startupDelay" value="20" />
 		<property name="overwriteExistingJobs" value="true" />
-	</bean>
+    </bean>
 
 
 </beans>

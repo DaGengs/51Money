@@ -2,13 +2,17 @@ package cn.iruier.provider.loan;
 
 import cn.iruier.core.util.ExecuteUtil;
 import cn.iruier.core.util.PageUtil;
+import cn.iruier.core.vo.LoanVo;
 import cn.iruier.core.vo.PageVo;
 import cn.iruier.core.vo.ResultVo;
+import cn.iruier.core.vo.StatusVo;
 import cn.iruier.entity.loan.Loan;
 import cn.iruier.mapper.loan.LoanMapper;
 import cn.iruier.service.loan.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: iruier
@@ -30,21 +34,22 @@ public class LoanProvider implements LoanService {
     }
 
     @Override
-    public PageVo<Loan> queryAll(int page, int size) {
-        int index = 0;
-        if (page > 0) {
-            index = (page - 1) * size;
-        }
-        return PageUtil.getPageVo(loanMapper.queryAll(index, size), loanMapper.queryCount());
-    }
-
-    @Override
-    public ResultVo updateStatus(int id, int status) {
-        return ExecuteUtil.getResult(loanMapper.updateStatus(id, status), "借款申请审核");
+    public StatusVo queryStatus(int user_id) {
+        return loanMapper.queryStatus(user_id);
     }
 
     @Override
     public Loan queryByAID(int account_id) {
         return loanMapper.queryByAID(account_id);
+    }
+
+    @Override
+    public List<Loan> queryList() {
+        return loanMapper.queryList();
+    }
+
+    @Override
+    public LoanVo queryDetail(int id) {
+        return loanMapper.queryDetail(id);
     }
 }

@@ -223,7 +223,7 @@ xblock{
 .container{
     width: 100%;
     height: 45px;
-    background-color: #222;
+    background-color: #01AAED;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .container .logo a{
@@ -482,10 +482,10 @@ table th, table td {
     position: fixed;
     bottom: 0px;
     width: 100%;
-    background-color: #222;
+    background-color: #e2e2e2;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     line-height: 41px;
-    color: #fff;
+    color: #0C0C0C;
     /*padding-left: 10px;*/
 }
 .footer .copyright{

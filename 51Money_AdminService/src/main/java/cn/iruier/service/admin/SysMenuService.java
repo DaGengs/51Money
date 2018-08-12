@@ -31,4 +31,6 @@ public interface SysMenuService {
     List<SysMenu> queryAllMenuList(int user_id);
 
     ResultVo queryTree();
+
+    ResultVo getMenuTree();
 }

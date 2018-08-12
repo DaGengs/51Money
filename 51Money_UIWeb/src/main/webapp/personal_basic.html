@@ -15,6 +15,7 @@
     <script type="text/javascript" src="script/layer/layer.js" ></script>
     <script type="text/javascript" src="script/common.js"></script>
     <script type="text/javascript" src="script/user.js" ></script>
+    <script type="text/javascript" src="script/personal.js"></script>
 </head>
 <body>
 <script src="script/head.js"></script>
@@ -89,7 +90,7 @@
                                     <option value="0">请选择</option>
                                     <option value="1">中专</option>
                                     <option value="2">大专</option>
-                                    <option value="3">本科</option>
+                                    <option value="3" selected>本科</option>
                                     <option value="4">研究生</option>
                                 </select>
                             </div>
@@ -103,7 +104,7 @@
                                 <select class="form-control" id="income" name="income">
                                     <option value="0">请选择</option>
                                     <option value="1">10000</option>
-                                    <option value="2">20000</option>
+                                    <option value="2" selected>20000</option>
                                     <option value="3">30000</option>
                                     <option value="4">40000</option>
                                 </select>
@@ -118,7 +119,7 @@
                                 <select class="form-control" id="marriage" name="marriage.id">
                                     <option value="0">请选择</option>
                                     <option value="1">已婚</option>
-                                    <option value="2">未婚</option>
+                                    <option value="2" selected>未婚</option>
                                 </select>
                             </div>
                         </div>
@@ -130,7 +131,7 @@
                             <div class="col-sm-4">
                                 <select class="form-control" id="kidCount" name="kidCount.id">
                                     <option value="0">请选择</option>
-                                    <option value="1">没有</option>
+                                    <option value="1" selected>没有</option>
                                     <option value="2">特别多</option>
                                 </select>
                             </div>
@@ -143,7 +144,7 @@
                             <div class="col-sm-4">
                                 <select class="form-control" id="house" name="house">
                                     <option value="0">请选择</option>
-                                    <option value="1">没有</option>
+                                    <option value="1" selected>没有</option>
                                     <option value="2">特别多</option>
                                 </select>
                             </div>
@@ -168,30 +169,5 @@
 
 <script src="script/foot.js"></script>
 
-
-<script>
-
-    $(function(){
-
-        $('#submitBtn').click(function(){
-
-            $('#userInfoForm').ajaxSubmit({
-                success: function (r) {
-                    if(r.code == 0){
-                        layer.alert(r.msg, function(index){
-                            //window.location.reload();
-                            //console.log('回调。。。。。');
-                            layer.close(index);
-                        });
-                        //console.log('不是回调。。。。。');
-                    }else{
-                        layer.alert(r.msg);
-                    }
-
-                }
-            });
-        });
-    })
-</script>
 </body>
 </html>
